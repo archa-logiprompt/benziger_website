@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Staff;
 use App\Models\Department;
-use DB;
+use Illuminate\Support\Facades\DB;
+// use DB;
 class StaffController extends Controller
 {
 

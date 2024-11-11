@@ -6,6 +6,9 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\JournalController;
+use App\Http\Controllers\JournalAuthorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +49,10 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('admin/staff/delete/{id}', [StaffController::class,'destroy']);
     Route::get('admin/staff/edit/{id}',[StaffController::class,'edit']);
     Route::post('admin/staff/update/{id}', [StaffController::class,'update']);
-    
+
+
+    // journal
+    Route::post('admin/user/journal',[JournalController::class, 'create']) ->name('admin.user.journal');
+    Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journalAuthor');
+
 });

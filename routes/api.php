@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JournalController;
+use App\Http\Controllers\JournalAuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::post('admin/user/journal', [JournalController::class, 'createJournal'])->name('admin.user.journal');
+Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journalAuthor');
