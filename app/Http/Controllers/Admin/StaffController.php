@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 use App\Models\Department;
-use DB;
+use Illuminate\Support\Facades\DB;
+// use DB;
 class StaffController extends Controller
 {
 
