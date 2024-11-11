@@ -23,9 +23,8 @@ use App\Http\Controllers\JournalAuthorController;
 
 Route::get('/login', [AdminController::class, 'login'])->name('login');
 Route::post('/check-login', [AdminController::class, 'check'])->name('check.login');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+
 Route::middleware([AdminMiddleware::class])->group(function () {
 
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
