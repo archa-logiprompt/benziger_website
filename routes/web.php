@@ -57,6 +57,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('admin/role/edit/{id}', [AdminController::class, 'edit']);
     Route::post('admin/role/update/{id}', [AdminController::class, 'updateRole'])->name('admin.role.update');
     Route::get('admin/role/assign/{id}', [AdminController::class, 'assign']);
+    Route::post('admin/role/assign', [AdminController::class, 'AssignRole'])->name('admin.role.assignrole');
     // Route::post('admin/role/assignrole', [AdminController::class, 'AssignRole']);
     // Route::post('admin/role/assignrole', [AdminController::class, '`AssignRole']);
 });

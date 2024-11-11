@@ -30,8 +30,9 @@
                                 <div class="col-4">
                                     <span>View</span>
                                 </div>
-                            </div>
-                            <form action="{{url('admin/role/assignrole')}}">
+                            </div> 
+                            <form method="POST" action="{{route('admin.role.assignrole')}}">
+                                @csrf
                                 <input type="hidden" name="role_id" , value="{{$assignData['roleid']}}" />
                                 @foreach($assignData['categories'] as $row)
                                 <div class="row m-4">
@@ -43,7 +44,7 @@
                                     </div>
                                     <div class="col-4">
                                         <span>
-                                            <input type="checkbox" name="category_id" value="{{$row->id}}">
+                                            <input type="checkbox" name="category_id[]" {{in_array($row->id,$assignData['assigned']->toArray())?'checked':''}} value="{{$row->id}}">
                                         </span>
                                     </div>
                                 </div>
