@@ -28,14 +28,18 @@
    </div> <div class="form-group">
 <label for="password"> Password</label>
 <input type="text" name="password" class="form-control">
-</div> <div class="form-group">
+</div> 
+<div class="form-group">
 <label for="">Department</label>
 <select class="form-control" name="department_id">
     @foreach($department as $item)
       <option value="{{$item->id}}">{{$item->name}}</option>
     @endforeach
   </select>
-</div> <div class="form-group">
+</div> 
+
+
+<div class="form-group">
 <label for="">Description</label>
 {{-- <input type="text" name="description" class="form-control"> --}}
 <textarea  name="description" class="form-control"></textarea>

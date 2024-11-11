@@ -39,7 +39,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
 
 
-
+//staff
     Route::get('admin/staff',[StaffController::class,'index'])->name('admin.staff');
     Route::get('staff/create',[StaffController::class,'create'])->name('admin.staff.create');
     Route::post('admin/staff/store',[StaffController::class,'store'])->name('admin.staff.store');

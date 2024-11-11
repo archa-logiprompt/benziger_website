@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Staff;
+// use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
 use App\Models\Department;
 use DB;
 class StaffController extends Controller
@@ -12,6 +16,8 @@ class StaffController extends Controller
     public function index(){
      
         $staff=Staff::all();
+        // $role=Role::all();
+
         return view('admin.staff.index',compact('staff'));
 
      
@@ -29,22 +35,31 @@ class StaffController extends Controller
         // dd($request->all()); 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|valid_email|is_unique[users.email]', 
+            'email' => 'required|email|unique:users,email', 
             'phone' => 'nullable|string', 
             'password' => 'nullable|string', 
             'department_id' => 'nullable|string', 
             'description' => 'nullable|string',     
         ]);
         Staff::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            
+          'name' => $request->name,
+                'email' => $request->email,
+                'password' =>$request->password,
             'phone' =>$request->phone,
-            'password' =>$request->password,
             'department_id' =>$request->department_id,
             'description' =>$request->description,
 
            
         ]);
+        User::create(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role'=>$request->role
+            ]
+            );
         return redirect()->route('admin.staff')->with('success', 'Staff created successfully!');
     }
 

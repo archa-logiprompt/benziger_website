@@ -1,7 +1,7 @@
 
 
 @extends('admin.admin_layouts');
-@section('body');
+@section('body')
 <div class="container">
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
         <div>
@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Department List</h4>
+                    <h4 class="card-title">Staff List</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
