@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\AssignPermission;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Patient;
 use App\Models\Role;
+use App\Models\PermissionCategory;
 
 class AdminController extends Controller
 {
@@ -39,25 +37,11 @@ class AdminController extends Controller
         }
     }
 
-    // public function dashboard()
-    // {
-
-    //     $Patient = Patient::orderBy('patients.id', 'desc')
-    //     ->join('doctors', 'patients.doctor_id', '=', 'doctors.id')
-    //     ->join('department', 'patients.department_id', '=', 'department.id')
-    //     ->join('slots', 'patients.slot_id', '=', 'slots.id')->get();
-
-    //     return view('admin.dashboard',compact('Patient'));
-    // }
-
     public function logout()
     {
         Auth::logout();
         return redirect('/login');
     }
-
-
-
 
     public function department()
     {
@@ -77,9 +61,6 @@ class AdminController extends Controller
         return view('admin.roles.create');
     }
 
-
-
-
     public function createRole(Request $request)
     {
         $request->validate([
@@ -92,4 +73,78 @@ class AdminController extends Controller
         ]);
         return redirect(route('admin.roles.view'));
     }
+    public function edit($id)
+    {
+        $editData = Role::where('id', $id)->first();
+        return view('admin.roles.edit', compact('editData'));
+    }
+
+    public function updateRole(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+        $post = Role::find($id);
+        $post->update($request->all());
+        return redirect()->route('admin.roles.view')->with('success', 'role updated successfully.');
+    }
+
+
+    public function deleteRole($id)
+    {
+        Role::where('id', $id)->delete();
+        return back();
+    }
+
+
+    public function assign($id)
+    {
+        $assignData['categories'] = PermissionCategory::all();
+
+         $assignData['roleid'] = $id;
+        return view('admin.roles.assign', compact('assignData'));
+    }
+
+
+    public function AssignRole(Request $request)
+    {
+
+
+        AssignPermission::create([
+            "catgory_id" => $request->catgory_id,
+            "role_id" => 1,
+            "can_view" => 1
+        ]);
+    }
+
+
+
+
+
+
+    // public function AssignRole(Request $request, $id)
+    // {
+    //     dd($id);
+    //     $existingData = AssignPermission::where('id', $id)->first();
+
+    //     if ($existingData) {
+
+    //         $existingData->update([
+    //             'role_id' =>  $request->route('id'),
+    //             'category_id' => $request->category_id,
+    //             'can_view' => 1,
+    //         ]);
+    //     } else {
+
+    //         $existingData = AssignPermission::create([
+    //             'role_id' => $request->route('id'),
+    //             'category_id' => $request->category_id,
+    //             'can_view' => 1,
+    //         ]);
+    //     }
+
+
+    //     return view('admin.roles.assign', compact('existingData'));
+    // }
 }

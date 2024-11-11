@@ -54,4 +54,13 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('admin/user/journal',[JournalController::class, 'create']) ->name('admin.user.journal');
     Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journalAuthor');
 
+    Route::get('admin/roles/index', [AdminController::class, 'viewRole'])->name('admin.roles.view');
+    Route::get('admin/roles/view', [AdminController::class, 'CreateRoleView'])->name('admin.role.createView');
+    Route::post('admin/role/store', [AdminController::class, 'createRole'])->name('admin.role.store');
+    Route::get('admin/role/delete/{id}', [AdminController::class, 'deleteRole'])->name('admin.role.delete');
+    Route::get('admin/role/edit/{id}', [AdminController::class, 'edit']);
+    Route::post('admin/role/update/{id}', [AdminController::class, 'updateRole'])->name('admin.role.update');
+    Route::get('admin/role/assign/{id}', [AdminController::class, 'assign']);
+    // Route::post('admin/role/assignrole', [AdminController::class, 'AssignRole']);
+    // Route::post('admin/role/assignrole', [AdminController::class, '`AssignRole']);
 });
