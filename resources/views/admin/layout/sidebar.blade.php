@@ -46,8 +46,14 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.staff') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-users"></i> 
+                        <i class="fa fa-users"></i>
                         <p>Staff</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.roles.view') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-users"></i>
+                        <p>Roles</p>
                     </a>
                 </li>
 

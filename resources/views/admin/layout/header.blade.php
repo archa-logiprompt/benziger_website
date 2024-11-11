@@ -1,88 +1,88 @@
 <div class="main-panel">
-            <div class="main-header">
-                <div class="main-header-logo">
-                    <!-- Logo Header -->
-                    <div class="logo-header" data-background-color="dark">
-                        <a href="index.html" class="logo">
-                            <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
-                                height="20" />
-                        </a>
-                        <div class="nav-toggle">
-                            <button class="btn btn-toggle toggle-sidebar">
-                                <i class="gg-menu-right"></i>
-                            </button>
-                            <button class="btn btn-toggle sidenav-toggler">
-                                <i class="gg-menu-left"></i>
-                            </button>
-                        </div>
-                        <button class="topbar-toggler more">
-                            <i class="gg-more-vertical-alt"></i>
-                        </button>
-                    </div>
-                    <!-- End Logo Header -->
-                </div>
-                <!-- Navbar Header -->
-                <div class="main-header">
-                    <!--@if (session('success'))-->
-                    <!--    <div class="alert alert-success">-->
-                    <!--        {{ session('success') }}-->
-                    <!--    </div>-->
-                    <!--@endif-->
+  <div class="main-header">
+    <div class="main-header-logo">
+      <!-- Logo Header -->
+      <div class="logo-header" data-background-color="dark">
+        <a href="index.html" class="logo">
+          <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+            height="20" />
+        </a>
+        <div class="nav-toggle">
+          <button class="btn btn-toggle toggle-sidebar">
+            <i class="gg-menu-right"></i>
+          </button>
+          <button class="btn btn-toggle sidenav-toggler">
+            <i class="gg-menu-left"></i>
+          </button>
+        </div>
+        <button class="topbar-toggler more">
+          <i class="gg-more-vertical-alt"></i>
+        </button>
+      </div>
+      <!-- End Logo Header -->
+    </div>
+    <!-- Navbar Header -->
+    <div class="main-header">
+      <!--@if (session('success'))-->
+      <!--    <div class="alert alert-success">-->
+      <!--        {{ session('success') }}-->
+      <!--    </div>-->
+      <!--@endif-->
 
-                    <!--@if (session('error'))-->
-                    <!--    <div class="alert alert-danger">-->
-                    <!--        {{ session('error') }}-->
-                    <!--    </div>-->
-                    <!--@endif-->
-                    <div class="main-header-logo">
-                        <!-- Logo Header -->
-                        <div class="logo-header" data-background-color="dark">
-                            <a href="#" class="logo">
-                                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
-                                    height="20" />
-                            </a>
-                            <div class="nav-toggle">
-                                <button class="btn btn-toggle toggle-sidebar">
-                                    <i class="gg-menu-right"></i>
-                                </button>
-                                <button class="btn btn-toggle sidenav-toggler">
-                                    <i class="gg-menu-left"></i>
-                                </button>
-                            </div>
-                            <button class="topbar-toggler more">
-                                <i class="gg-more-vertical-alt"></i>
-                            </button>
-                        </div>
-                        <!-- End Logo Header -->
-                    </div>
-                    <!-- Navbar Header -->
-                    <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
-                        <div class="container-fluid">
-                            <nav
-                                class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
-                            </nav>
-                            <a href="https://www.bbconkollam.org/" target=_blank class="logo">
-                                <!-- <img src="https://azeezia.com/wp-content/themes/twentytwentyone/custom_assets/images/azeezia_logo.png"
+      <!--@if (session('error'))-->
+      <!--    <div class="alert alert-danger">-->
+      <!--        {{ session('error') }}-->
+      <!--    </div>-->
+      <!--@endif-->
+      <div class="main-header-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark">
+          <a href="#" class="logo">
+            <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+              height="20" />
+          </a>
+          <div class="nav-toggle">
+            <button class="btn btn-toggle toggle-sidebar">
+              <i class="gg-menu-right"></i>
+            </button>
+            <button class="btn btn-toggle sidenav-toggler">
+              <i class="gg-menu-left"></i>
+            </button>
+          </div>
+          <button class="topbar-toggler more">
+            <i class="gg-more-vertical-alt"></i>
+          </button>
+        </div>
+        <!-- End Logo Header -->
+      </div>
+      <!-- Navbar Header -->
+      <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+        <div class="container-fluid">
+          <nav
+            class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+          </nav>
+          <a href="https://www.bbconkollam.org/" target=_blank class="logo">
+            <!-- <img src="https://azeezia.com/wp-content/themes/twentytwentyone/custom_assets/images/azeezia_logo.png"
                     alt="navbar brand" class="navbar-brand" height="50" /> -->
-                                <img src="/backend/img/kaiadmin/logo_light.png" alt="navbar brand" class="navbar-brand"
-                                    height="50" />Benziger College of Nursing
+            <img src="/backend/img/kaiadmin/logo_light.png" alt="navbar brand" class="navbar-brand"
+              height="50" />Benziger College of Nursing
 
-                            </a>
-                            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                                <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                        aria-expanded="false" aria-haspopup="true">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-search animated fadeIn">
-                                        <form class="navbar-left navbar-form nav-search">
-                                            <div class="input-group">
-                                                <input type="text" placeholder="Search ..." class="form-control" />
-                                            </div>
-                                        </form>
-                                    </ul>
-                                </li>
-                                {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
+          </a>
+          <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+            <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                aria-expanded="false" aria-haspopup="true">
+                <i class="fa fa-search"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-search animated fadeIn">
+                <form class="navbar-left navbar-form nav-search">
+                  <div class="input-group">
+                    <input type="text" placeholder="Search ..." class="form-control" />
+                  </div>
+                </form>
+              </ul>
+            </li>
+            {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
                   <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-envelope"></i>
@@ -110,45 +110,45 @@
                           <a href="#">
                             <div class="notif-img">
                               <img src="{{ asset('images/user.png') }}" alt="Img Profile" />
-                        </div>
-                        <div class="notif-content">
-                            <span class="subject">Chad</span>
-                            <span class="block"> Ok, Thanks ! </span>
-                            <span class="time">12 minutes ago</span>
-                        </div>
-                        </a>
-                        <a href="#">
-                            <div class="notif-img">
-                                <img src="assets/img/mlane.jpg" alt="Img Profile" />
-                            </div>
-                            <div class="notif-content">
-                                <span class="subject">Jhon Doe</span>
-                                <span class="block">
-                                    Ready for the meeting today...
-                                </span>
-                                <span class="time">12 minutes ago</span>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div class="notif-img">
-                                <img src="assets/img/talha.jpg" alt="Img Profile" />
-                            </div>
-                            <div class="notif-content">
-                                <span class="subject">Talha</span>
-                                <span class="block"> Hi, Apa Kabar ? </span>
-                                <span class="time">17 minutes ago</span>
-                            </div>
-                        </a>
-                </div>
-            </div>
-            </li>
-            <li>
-                <a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-            </ul>
-            </li> --}}
-            {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
+        </div>
+        <div class="notif-content">
+          <span class="subject">Chad</span>
+          <span class="block"> Ok, Thanks ! </span>
+          <span class="time">12 minutes ago</span>
+        </div>
+        </a>
+        <a href="#">
+          <div class="notif-img">
+            <img src="assets/img/mlane.jpg" alt="Img Profile" />
+          </div>
+          <div class="notif-content">
+            <span class="subject">Jhon Doe</span>
+            <span class="block">
+              Ready for the meeting today...
+            </span>
+            <span class="time">12 minutes ago</span>
+          </div>
+        </a>
+        <a href="#">
+          <div class="notif-img">
+            <img src="assets/img/talha.jpg" alt="Img Profile" />
+          </div>
+          <div class="notif-content">
+            <span class="subject">Talha</span>
+            <span class="block"> Hi, Apa Kabar ? </span>
+            <span class="time">17 minutes ago</span>
+          </div>
+        </a>
+    </div>
+  </div>
+  </li>
+  <li>
+    <a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i>
+    </a>
+  </li>
+  </ul>
+  </li> --}}
+  {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
                   <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-bell"></i>
@@ -279,47 +279,47 @@
                   </div>
                 </li> --}}
 
-            <li class="nav-item topbar-user dropdown hidden-caret">
-                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                    <div class="avatar-sm">
-                        <img src="{{ asset('images/user.png') }}" alt="..." class="avatar-img rounded-circle" />
-                    </div>
-                    <span class="profile-username">
-                        <span class="op-7">Hi,</span>
-                        <span class="fw-bold">Admin</span>
-                    </span>
-                </a>
-                <ul class="dropdown-menu dropdown-user animated fadeIn">
-                    <div class="dropdown-user-scroll scrollbar-outer">
-                        <li>
-                            <div class="user-box">
-                                <div class="avatar-lg">
-                                    <img src="{{ asset('images/user.png') }}" alt="image profile"
-                                        class="avatar-img rounded" />
-                                </div>
-                                <div class="u-text">
-                                    <h4>Admin</h4>
-                                    <p class="text-muted">admin@gmail.com</p>
-                                    <!--<a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View-->
-                                    <!--    Profile</a>-->
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dropdown-divider"></div>
-                            {{-- <a class="dropdown-item" href="#">My Profile</a>
+  <li class="nav-item topbar-user dropdown hidden-caret">
+    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+      <div class="avatar-sm">
+        <img src="{{ asset('images/user.png') }}" alt="..." class="avatar-img rounded-circle" />
+      </div>
+      <span class="profile-username">
+        <span class="op-7">Hi,</span>
+        <span class="fw-bold">Admin</span>
+      </span>
+    </a>
+    <ul class="dropdown-menu dropdown-user animated fadeIn">
+      <div class="dropdown-user-scroll scrollbar-outer">
+        <li>
+          <div class="user-box">
+            <div class="avatar-lg">
+              <img src="{{ asset('images/user.png') }}" alt="image profile"
+                class="avatar-img rounded" />
+            </div>
+            <div class="u-text">
+              <h4>Admin</h4>
+              <p class="text-muted">admin@gmail.com</p>
+              <!--<a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View-->
+              <!--    Profile</a>-->
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown-divider"></div>
+          {{-- <a class="dropdown-item" href="#">My Profile</a>
                         <a class="dropdown-item" href="#">My Balance</a>
                         <a class="dropdown-item" href="#">Inbox</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Account Setting</a>
                         <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
-                        </li>
-                    </div>
-                </ul>
-            </li>
-            </ul>
-        </div>
-        </nav>
-        <!-- End Navbar -->
-    </div>
+          <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
+        </li>
+      </div>
+    </ul>
+  </li>
+  </ul>
+</div>
+</nav>
+<!-- End Navbar -->
+</div>
