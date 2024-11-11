@@ -39,8 +39,9 @@
 
 
                                     <td>
-                                        <a href="{{ URL::to('admin/staff/edit/'.$row->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                                        <a href="{{ URL::to('admin/staff/delete/'.$row->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="{{ URL::to('admin/role/assign/'.$row->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-tag"></i></a>
+                                        <a href="{{ URL::to('admin/role/edit/'.$row->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ URL::to('admin/role/delete/'.$row->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
