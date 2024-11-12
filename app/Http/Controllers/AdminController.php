@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\AssignPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Role;
 use App\Models\PermissionCategory;
+
+
 
 class AdminController extends Controller
 {
@@ -31,6 +34,22 @@ class AdminController extends Controller
         ];
 
         if (Auth::attempt($user)) {
+            $userId = Auth::id();
+
+
+            $userData = DB::table('users')
+                ->join('staff', 'staff.userid', '=', 'users.id')
+                ->join('assign_permissions', 'assign_permissions.role_id', 'staff.roleid')
+                ->join('permission_category', 'permission_category.id', 'assign_permissions.category_id')
+                ->where('assign_permissions.can_view', 1)
+                ->where('users.id', $userId)
+                ->select('permission_category.*')
+                ->get();
+
+
+            // Session::put('sidebar', $userData);
+
+
             return redirect()->route('dashboard');
         } else {
             return redirect()->route('login')->with('error', 'Invalid Credentils');
@@ -103,9 +122,7 @@ class AdminController extends Controller
         $assignData['categories'] = PermissionCategory::all();
         $assignData['assigned'] = AssignPermission::where(['role_id' => $id, 'can_view' => 1])->pluck('category_id');
 
-        // dd($assignData['assigned']);
         $assignData['roleid'] = $id;
-        // dd($assignData);
         return view('admin.roles.assign', compact('assignData'));
     }
 
@@ -116,7 +133,6 @@ class AdminController extends Controller
 
         $categories = PermissionCategory::all()->pluck('id');
         $category_selected = $request->category_id;
-        // dd($category_selected);
         $role_id = $request->role_id;
 
         AssignPermission::where(['role_id' => $role_id])->delete();

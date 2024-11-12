@@ -29,29 +29,30 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-  
+
 
     //ddepartment
     Route::get('department', [DepartmentController::class, 'index'])->name('department');
     Route::get('admin/department/create', [DepartmentController::class, 'create'])->name('admin.department.create');
     Route::post('admin/department/store', [DepartmentController::class, 'store'])->name('admin.department.store');
-    Route::get('admin/department/delete/{id}', [DepartmentController::class,'destroy']);
-    Route::get('admin/department/edit/{id}', [DepartmentController::class,'edit']);
-    Route::post('admin/department/update/{id}', [DepartmentController::class,'update']);
+    Route::get('admin/department/delete/{id}', [DepartmentController::class, 'destroy']);
+    Route::get('admin/department/edit/{id}', [DepartmentController::class, 'edit']);
+    Route::post('admin/department/update/{id}', [DepartmentController::class, 'update']);
 
 
 
 
-    Route::get('admin/staff',[StaffController::class,'index'])->name('admin.staff');
-    Route::get('staff/create',[StaffController::class,'create'])->name('admin.staff.create');
-    Route::post('admin/staff/store',[StaffController::class,'store'])->name('admin.staff.store');
-    Route::get('admin/staff/delete/{id}', [StaffController::class,'destroy']);
-    Route::get('admin/staff/edit/{id}',[StaffController::class,'edit']);
-    Route::post('admin/staff/update/{id}', [StaffController::class,'update']);
+    Route::get('admin/staff', [StaffController::class, 'index'])->name('admin.staff');
+    Route::get('staff/create', [StaffController::class, 'create'])->name('admin.staff.create');
+    Route::post('admin/staff/store', [StaffController::class, 'store'])->name('admin.staff.store');
+    Route::get('admin/staff/delete/{id}', [StaffController::class, 'destroy']);
+    Route::get('admin/staff/edit/{id}', [StaffController::class, 'edit']);
+    Route::post('admin/staff/update/{id}', [StaffController::class, 'update']);
+
 
 
     // journal
-    Route::post('admin/user/journal',[JournalController::class, 'create']) ->name('admin.user.journal');
+    Route::post('admin/user/journal', [JournalController::class, 'create'])->name('admin.user.journal');
     Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journalAuthor');
 
     Route::get('admin/roles/index', [AdminController::class, 'viewRole'])->name('admin.roles.view');
@@ -62,6 +63,4 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('admin/role/update/{id}', [AdminController::class, 'updateRole'])->name('admin.role.update');
     Route::get('admin/role/assign/{id}', [AdminController::class, 'assign']);
     Route::post('admin/role/assign', [AdminController::class, 'AssignRole'])->name('admin.role.assignrole');
-    // Route::post('admin/role/assignrole', [AdminController::class, 'AssignRole']);
-    // Route::post('admin/role/assignrole', [AdminController::class, '`AssignRole']);
 });
