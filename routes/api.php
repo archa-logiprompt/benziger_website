@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\JournalAuthorController;
+// use App\Http\Controllers\Admin\ResearchAreaController;
+use App\Http\Controllers\ResearchareaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +18,8 @@ use App\Http\Controllers\JournalAuthorController;
 |
 */
 
-// Route::post('admin/user/journal', [JournalController::class, 'createJournal'])->name('admin.user.journal');
-Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journalAuthor');
+Route::post('admin/researcharea', [ResearchareaController::class, 'create'])->name('admin.researcharea.create');
+Route::get('admin/researcharea/view', [ResearchareaController::class, 'view'])->name('researcharea');
+Route::get('admin/researcharea/delete/{id}', [ResearchareaController::class, 'destroy'])->name('admin.researcharea.delete');
+Route::get('admin/researcharea/edit/{id}', [ResearchareaController::class, 'edit'])->name('admin.researcharea.edit');
+Route::post('admin/researcharea/update/{id}', [ResearchareaController::class, 'update'])->name('researcharea');

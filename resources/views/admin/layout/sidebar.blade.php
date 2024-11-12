@@ -50,6 +50,12 @@
                         <p>Staff</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.researcharea') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-users"></i> 
+                        <p>Research Area</p>
+                    </a>
+                </li>
 
             </ul>
         </div>

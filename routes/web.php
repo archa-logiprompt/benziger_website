@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\JournalAuthorController;
-
+use App\Http\Controllers\ResearchareaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +42,6 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
 
 
-
     Route::get('admin/staff',[StaffController::class,'index'])->name('admin.staff');
     Route::get('staff/create',[StaffController::class,'create'])->name('admin.staff.create');
     Route::post('admin/staff/store',[StaffController::class,'store'])->name('admin.staff.store');
@@ -51,8 +50,16 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('admin/staff/update/{id}', [StaffController::class,'update']);
 
 
-    // journal
+    // adding journal and journal author
     Route::post('admin/user/journal',[JournalController::class, 'create']) ->name('admin.user.journal');
-    Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journalAuthor');
+    Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journal');
+
+    // research area crud
+    Route::get('researcharea', [ResearchareaController::class, 'view'])->name('admin.researcharea');
+    Route::post('admin/researcharea/create', [ResearchareaController::class, 'create'])->name('admin.researcharea.create');
+    // Route::get('admin/researcharea/view', [ResearchareaController::class, 'view'])->name('admin.researcharea.view');
+    Route::get('admin/researcharea/delete/{id}', [ResearchareaController::class, 'destroy']);
+    Route::get('admin/researcharea/edit/{id}', [ResearchareaController::class, 'edit']);
+    Route::post('admin/researcharea/update/{id}', [ResearchareaController::class, 'update']);
 
 });
