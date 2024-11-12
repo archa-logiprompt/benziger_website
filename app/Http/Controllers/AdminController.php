@@ -101,7 +101,7 @@ class AdminController extends Controller
     public function assign($id)
     {
         $assignData['categories'] = PermissionCategory::all();
-        $assignData['assigned'] = AssignPermission::where(['role_id'=>$id,'can_view'=>1])->pluck('category_id');
+        $assignData['assigned'] = AssignPermission::where(['role_id' => $id, 'can_view' => 1])->pluck('category_id');
 
         // dd($assignData['assigned']);
         $assignData['roleid'] = $id;
@@ -119,16 +119,16 @@ class AdminController extends Controller
         // dd($category_selected);
         $role_id = $request->role_id;
 
-        AssignPermission::where(['role_id'=>$role_id])->delete();
+        AssignPermission::where(['role_id' => $role_id])->delete();
         foreach ($categories as $key => $value) {
             $arr = [
-                'category_id'=>$value,
-                'role_id'=>$role_id,
-                'can_view'=>in_array($value,$category_selected)?1:0,
+                'category_id' => $value,
+                'role_id' => $role_id,
+                'can_view' => in_array($value, $category_selected) ? 1 : 0,
             ];
             AssignPermission::create($arr);
-        } 
-         
+        }
+
         // AssignPermission::create([
         //     "catgory_id" => $request->catgory_id,
         //     "role_id" => $request->role_id,
