@@ -1,16 +1,15 @@
 @extends('admin.admin_layouts')
 
-@section('body')</div>
+@section('body')
 <div class="page-inner">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
                     <h3 class="fw-bold mb-3">Dashboard</h3>
-                    <h6 class="op-7 mb-2">Free Bootstrap 5 Admin Dashboard</h6>
                 </div>
-                <div class="ms-md-auto py-2 py-md-0">
+                <!-- <div class="ms-md-auto py-2 py-md-0">
                     <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
                     <a href="#" class="btn btn-primary btn-round">Add Customer</a>
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div class="col-sm-6 col-md-3">
@@ -24,8 +23,8 @@
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Visitors</p>
-                                        <h4 class="card-title">1,294</h4>
+                                        <p class="card-category">Staff</p>
+                                        <h4 class="card-title">{{$staff}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -43,8 +42,8 @@
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Subscribers</p>
-                                        <h4 class="card-title">1303</h4>
+                                        <p class="card-category">Department</p>
+                                        <h4 class="card-title">{{$department}}</h4>
                                     </div>
                                 </div>
                             </div>
