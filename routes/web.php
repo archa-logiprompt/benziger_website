@@ -23,7 +23,7 @@ use App\Http\Controllers\JournalAuthorController;
 
 Route::get('/login', [AdminController::class, 'login'])->name('login');
 Route::post('/check-login', [AdminController::class, 'check'])->name('check.login');
-Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/', [AdminController::class, 'login'])->name('login');
 
 Route::middleware([AdminMiddleware::class])->group(function () {
 

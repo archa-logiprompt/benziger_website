@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Staff;
-// use App\Models\Role;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
@@ -17,9 +17,9 @@ class StaffController extends Controller
     public function index(){
      
         $staff=Staff::all();
-        // $role=Role::all();
+        $role=Role::all();
 
-        return view('admin.staff.index',compact('staff'));
+        return view('admin.staff.index',compact('staff','role'));
 
      
        
@@ -27,7 +27,9 @@ class StaffController extends Controller
     public function create() {
 
         $department=Department::all();
-        return view('admin.staff.create',compact('department'));
+        $role=Role::all();
+
+        return view('admin.staff.create',compact('department','role'));
         
     }
 

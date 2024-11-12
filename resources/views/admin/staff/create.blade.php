@@ -38,7 +38,14 @@
   </select>
 </div> 
 
-
+<div class="form-group">
+<label for="">Role</label>
+<select class="form-control" name="role">
+    @foreach($role as $roleitem)
+      <option value="{{$roleitem->id}}">{{$roleitem->name}}</option>
+    @endforeach
+  </select>
+</div> 
 <div class="form-group">
 <label for="">Description</label>
 {{-- <input type="text" name="description" class="form-control"> --}}
