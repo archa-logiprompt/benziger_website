@@ -128,41 +128,5 @@ class AdminController extends Controller
             ];
             AssignPermission::create($arr);
         }
-
-        // AssignPermission::create([
-        //     "catgory_id" => $request->catgory_id,
-        //     "role_id" => $request->role_id,
-        //     "can_view" => 1
-        // ]);
     }
-
-
-
-
-
-
-    // public function AssignRole(Request $request, $id)
-    // {
-    //     dd($id);
-    //     $existingData = AssignPermission::where('id', $id)->first();
-
-    //     if ($existingData) {
-
-    //         $existingData->update([
-    //             'role_id' =>  $request->route('id'),
-    //             'category_id' => $request->category_id,
-    //             'can_view' => 1,
-    //         ]);
-    //     } else {
-
-    //         $existingData = AssignPermission::create([
-    //             'role_id' => $request->route('id'),
-    //             'category_id' => $request->category_id,
-    //             'can_view' => 1,
-    //         ]);
-    //     }
-
-
-    //     return view('admin.roles.assign', compact('existingData'));
-    // }
 }
