@@ -13,7 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('journal_author', function (Blueprint $table) {
+        Schema::create('journal_authors', function (Blueprint $table) {
+           
             $table->increments('id');
             $table->string('name');
             $table->string('designation');
@@ -27,6 +28,8 @@ return new class extends Migration
             $table->string('country');
             $table->integer('postalCode');
             $table->integer('main');
+            $table->string("journal_id");
+            $table->foreign('journal_id')->references('id')->on('journal')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -36,9 +39,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('journal_author');
-        
+        Schema::dropIfExists('journal_authors');
     }
 };

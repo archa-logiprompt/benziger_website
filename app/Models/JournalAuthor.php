@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class JournalAuthor extends Model
 {
     use HasFactory;
-    use HasFactory;
-    protected $table = "journal_author";
+   
+    protected $table = "journal_authors";
     protected $fillable = [
         'journal_id',
         'name', 
@@ -26,3 +26,4 @@ class JournalAuthor extends Model
         'main'
     ];
 }
+

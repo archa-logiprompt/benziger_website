@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\JournalAuthorController;
-
+use App\Http\Controllers\ResearchareaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +23,9 @@ use App\Http\Controllers\JournalAuthorController;
 
 Route::get('/login', [AdminController::class, 'login'])->name('login');
 Route::post('/check-login', [AdminController::class, 'check'])->name('check.login');
-Route::get('/', [AdminController::class, 'login'])->name('login');
-
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::middleware([AdminMiddleware::class])->group(function () {
 
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
@@ -41,7 +42,6 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
 
 
-
     Route::get('admin/staff', [StaffController::class, 'index'])->name('admin.staff');
     Route::get('staff/create', [StaffController::class, 'create'])->name('admin.staff.create');
     Route::post('admin/staff/store', [StaffController::class, 'store'])->name('admin.staff.store');
@@ -50,17 +50,15 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('admin/staff/update/{id}', [StaffController::class, 'update']);
 
 
-
-    // journal
+    // adding journal and journal author
     Route::post('admin/user/journal', [JournalController::class, 'create'])->name('admin.user.journal');
-    Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journalAuthor');
+    Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journal');
 
-    Route::get('admin/roles/index', [AdminController::class, 'viewRole'])->name('admin.roles.view');
-    Route::get('admin/roles/view', [AdminController::class, 'CreateRoleView'])->name('admin.role.createView');
-    Route::post('admin/role/store', [AdminController::class, 'createRole'])->name('admin.role.store');
-    Route::get('admin/role/delete/{id}', [AdminController::class, 'deleteRole'])->name('admin.role.delete');
-    Route::get('admin/role/edit/{id}', [AdminController::class, 'edit']);
-    Route::post('admin/role/update/{id}', [AdminController::class, 'updateRole'])->name('admin.role.update');
-    Route::get('admin/role/assign/{id}', [AdminController::class, 'assign']);
-    Route::post('admin/role/assign', [AdminController::class, 'AssignRole'])->name('admin.role.assignrole');
+    // research area crud
+    Route::get('admin/researcharea', [ResearchareaController::class, 'index'])->name('admin.researcharea');
+    Route::get('admin/researcharea/create', [ResearchareaController::class, 'create'])->name('admin.researcharea.create');
+    Route::post('admin/researcharea/store', [ResearchareaController::class, 'store'])->name('admin.researcharea.store');
+    Route::get('admin/researcharea/delete/{id}', [ResearchareaController::class, 'destroy']);
+    Route::get('admin/researcharea/edit/{id}', [ResearchareaController::class, 'edit']);
+    Route::post('admin/researcharea/update/{id}', [ResearchareaController::class, 'update']);
 });

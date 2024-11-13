@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('journal_authors', function (Blueprint $table) {
-            $table->string("journal_id");
-            $table->foreign('journal_id')->references('id')->on('journal')->onDelete('cascade')->onUpdate('cascade');
-
+        Schema::create('research_area', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('researchArea',40 );
+            $table->string('description', 15)->nullable();;
+            $table->timestamps();
         });
+
     }
 
     /**
@@ -27,7 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journal_authors');
-       
+        Schema::dropIfExists('research_area');
     }
 };
