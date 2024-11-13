@@ -52,10 +52,18 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.researcharea') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-users"></i> 
+                        <i class="fa fa-book"></i> 
                         <p>Research Area</p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.generalSettings') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-cog"></i> 
+                        <p>General Settings</p>
+                    </a>
+                </li>
+
 
             </ul>
         </div>
