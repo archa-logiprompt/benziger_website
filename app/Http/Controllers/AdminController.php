@@ -6,6 +6,7 @@ use App\Models\AssignPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use App\Models\Role;
 use App\Models\PermissionCategory;
 
@@ -44,10 +45,11 @@ class AdminController extends Controller
                 ->where('assign_permissions.can_view', 1)
                 ->where('users.id', $userId)
                 ->select('permission_category.*')
-                ->get();
+                ->pluck('short_code');
 
+            Session::put('permissions', $userData);
 
-            // Session::put('sidebar', $userData);
+            // dd(Session::get('sidebar'));
 
 
             return redirect()->route('dashboard');
