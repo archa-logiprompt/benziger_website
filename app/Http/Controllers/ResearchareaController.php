@@ -7,7 +7,13 @@ use App\Models\ResearchArea;
 
 class ResearchareaController extends Controller
 {
-    public function create(Request $request)
+
+    public function create()
+    {
+        return  view('admin.researchArea.create');
+    }
+
+    public function store(Request $request)
     {
         // Validate the input data
         $request->validate([
@@ -21,44 +27,41 @@ class ResearchareaController extends Controller
             'description' => $request->description,
         ]);
 
-     return redirect()->route('admin.researcharea.create')->with('success', 'research area added successfully!');
-
+        return redirect('admin/researcharea')->with('success', 'research area added successfully!');
     }
 
 
-    public function view()
+    public function index()
     {
         $researchAreas = ResearchArea::all();
         // dd($researchAreas);
         return view('admin.researchArea.index', compact('researchAreas'));
-
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
 
-        ResearchArea::where('id',$id)->delete();
-        return redirect()->route('admin.researchArea.index')->with('success', 'research area deleted successfully!');
-        
+        ResearchArea::where('id', $id)->delete();
+        return redirect('admin/researcharea')->with('success', 'research area deleted successfully!');
     }
 
 
     public function edit($id)
-{ 
-  
-     $researchArea= ResearchArea::where('id',$id)->first();
-     dd($researchArea);
-    return view('admin.researchArea.edit',compact('researchArea'));
-}
+    {
 
-public function update(Request $request, $id)
+        $service = ResearchArea::where('id', $id)->first();
+        // dd($researchArea);
+        return view('admin.researchArea.edit', compact('service'));
+    }
+
+    public function update(Request $request, $id)
     {
         $request->validate([
             'researchArea' => 'required',
             'description',
         ]);
-      $post = ResearchArea::find($id);
-      $post->update($request->all());
-      return redirect()->route('admin.researchArea')->with('success', 'research Area updated successfully.');
+        $post = ResearchArea::find($id);
+        $post->update($request->all());
+        return redirect('admin/researcharea')->with('success', 'research Area updated successfully.');
     }
-
 }
