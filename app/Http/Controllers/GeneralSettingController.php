@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GeneralSettings;
+use Illuminate\Support\Facades\Storage;
 
 class GeneralSettingController extends Controller
 
@@ -16,8 +17,7 @@ class GeneralSettingController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
-
+        // Validate the input
         $request->validate([
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'contact',
@@ -33,15 +33,17 @@ class GeneralSettingController extends Controller
             'apiSecret',
             'payment',
             'amount'
-
         ]);
 
         $logoPath = null;
+
         if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('settings', 'public');
+            $logo = $request->file('logo');
+            $logoPath = 'generalsettings/' . time() . '_' . $logo->getClientOriginalName();
+
+            $logo->move(public_path('generalsettings'), $logoPath);
         }
 
-        // Create the department
         GeneralSettings::create([
             'logo' => $logoPath,
             'contact' => $request->contact,
@@ -59,8 +61,7 @@ class GeneralSettingController extends Controller
             'amount' => $request->amount
         ]);
 
-
-        return redirect('admin/generalSettings')->with('success', 'Settings added successfully!');
+        return redirect('admin/generalsettings')->with('success', 'Settings added successfully!');
     }
 
 
@@ -68,16 +69,14 @@ class GeneralSettingController extends Controller
     public function index()
     {
         $settings = GeneralSettings::all();
-        dd ($settings);
-        // return view('welcome');
-        // return view('admin.generalSettings.index', compact('settings'));
+
+        return view('admin.generalSettings.index', compact('settings'));
     }
 
     public function destroy($id)
     {
-
         GeneralSettings::where('id', $id)->delete();
-        return redirect('admin/generalSettings')->with('success', 'General Settings deleted successfully!');
+        return redirect('admin/generalsettings')->with('success', 'General Settings deleted successfully!');
     }
 
 
@@ -85,41 +84,39 @@ class GeneralSettingController extends Controller
     {
 
         $settings = GeneralSettings::where('id', $id)->first();
-        // dd($researchArea);
         return view('admin.generalSettings.edit', compact('settings'));
     }
 
+
     public function update(Request $request, $id)
     {
-        $request->validate([
-            // 'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'contact',
-            'whatsappContact',
-            'email',
-            'address_line1',
-            'address_line2',
-            'city',
-            'state',
-            'country',
-            'postalCode',
-            'apiKey',
-            'apiSecret',
-            'payment',
-            'amount'
+        $validatedData = $request->validate([
+           'contact' => 'required|string|max:255',
+        'whatsappContact' => 'nullable|string|max:255',
+        'email' => 'nullable|string',
+        'address_line1' => 'nullable|string|max:255',
+        'address_line2' => 'nullable|string|max:255',
+        'city' => 'nullable|string|max:255',
+        'state' => 'nullable|string|max:255',
+        'country' => 'nullable|string|max:255',
+        'postalCode' => 'nullable|string|max:20',
+        'apiKey' => 'nullable|string|max:255',
+        'apiSecret' => 'nullable|string|max:255',
+        'payment' => 'nullable|boolean',
+        'amount' => 'nullable|numeric'
         ]);
 
-        $data = $request->except('logo');
+        $logoPath = null;
 
-        // Handle logo upload if present
         if ($request->hasFile('logo')) {
-            $logoPath = time() . '_' . $request->file('logo')->getClientOriginalName();
-            $path = $request->file('logo')->storeAs('settings', $logoPath, 'public');
-            $data['logo'] = '/storage/' . $path;
+            $logo = $request->file('logo');
+            $logoPath = 'generalsettings/' . time() . '_' . $logo->getClientOriginalName();
+            $logo->move(public_path('generalsettings'), $logoPath);
+            $validatedData['logo'] = $logoPath;
         }
 
-        // Update the record
-        GeneralSettings::where('id', $id)->update($data);
+        GeneralSettings::where('id', $id)->update($validatedData);
 
-        return redirect()->route('admin.generalsettings')->with('success', 'General settings updated successfully.');
+        return redirect('admin/generalsettings')->with('success', 'General settings updated successfully.');
     }
 }

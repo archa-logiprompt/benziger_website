@@ -6,19 +6,20 @@
             <h3 class="fw-bold mb-3">Edit General Settings</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
-            <a href="{{ route('department') }}" class="btn btn-primary btn-round me-2">
+            <a href="{{ route('admin.generalsettings') }}" class="btn btn-primary btn-round me-2">
                 <i class="fas fa-list"></i> View Settings
             </a>
         </div>
     </div>
-    <form action="{{ url('admin/department/update/'.$settings->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('admin/generalsettings/update/'.$settings->id) }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="card-body">
             <div class="form-group">
                 <label for="">Existing Logo</label>
                 <div>
-                    <img src="{{ asset('storage/'.$settings->image) }}" style="height: 90px; width: 120px;">
+
+                    <img src="{{ asset($settings->logo) }}" style="height: 90px; width: 120px;">
                 </div>
             </div>
 
@@ -37,6 +38,11 @@
             <div class="form-group">
                 <label for="">Email</label>
                 <input type="text" name="email" class="form-control" value="{{ old('email', $settings->email) }}" autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="">Whatsapp Contact</label>
+                <input type="text" name="whatsappContact" class="form-control" value="{{ old('whatsappContact', $settings->whatsappContact) }}" autofocus>
             </div>
 
             <div class="form-group">

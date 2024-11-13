@@ -6,13 +6,13 @@
             <h3 class="fw-bold mb-3">General Settings</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
-            <a href="{{ route('admin.generalsettings') }}" class="btn btn-primary btn-round me-2"><i class="fas fa-list"></i>
-                View Settings</a>
+            <a href="{{ route('admin.generalsettings') }}" class="btn btn-primary btn-round me-2"><i class="fas fa-list"></i> View Settings</a>
         </div>
     </div>
 
     <form action="{{ route('admin.generalsettings.store') }}" method="post" enctype="multipart/form-data">
         @csrf
+        <div class="card-body">
         <div class="card-body">
             <div class="form-group">
                 <label for="logo">Logo</label>
@@ -29,6 +29,12 @@
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" name="email" class="form-control" value="{{ old('email') }}" autofocus>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="whatsappContact">Whatsapp number</label>
+                <input type="text" name="whatsappContact" class="form-control" value="{{ old('whatsappContact') }}" autofocus>
             </div>
 
             <div class="form-group">
@@ -74,16 +80,16 @@
             <div class="form-group">
                 <label for="payment">Payment</label><br>
                 <label>
-                    <input type="radio" name="payment" value="0" {{ old('payment') == "0" ? "checked" : "" }}> No
+                    <input type="radio" name="payment" value="0" {{ old('payment') == "0" ? "checked" : "" }} onclick="toggleAmountField()"> No
                 </label>
                 <label>
-                    <input type="radio" name="payment" value="1" {{ old('payment') == "1" ? "checked" : "" }}> Yes
+                    <input type="radio" name="payment" value="1" {{ old('payment') == "1" ? "checked" : "" }} onclick="toggleAmountField()"> Yes
                 </label>
             </div>
-            
+
             <div class="form-group">
                 <label for="amount">Amount</label>
-                <input type="text" name="amount" class="form-control" value="{{ old('amount') }}" autofocus>
+                <input type="text" name="amount" id="amount" class="form-control" value="{{ old('amount') }}" {{ old('payment') == "1" ? '' : 'disabled' }}>
             </div>
 
             <div class="form-group">
@@ -92,4 +98,16 @@
         </div>
     </form>
 </div>
+
+<script>
+    function toggleAmountField() {
+        const paymentYes = document.querySelector('input[name="payment"][value="1"]');
+        const amountField = document.getElementById('amount');
+        
+        amountField.disabled = !paymentYes.checked;
+    }
+
+    document.addEventListener('DOMContentLoaded', toggleAmountField);
+</script>
 @endsection
+

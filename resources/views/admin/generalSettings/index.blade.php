@@ -1,6 +1,6 @@
 @extends('admin.admin_layouts')
 @section('body')
-<?php $currentPage ='admin.generalsettings'; ?>
+<?php $currentPage = 'admin.generalsettings'; ?>
 <div class="container">
     <div class="page-inner">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
@@ -8,7 +8,12 @@
                 <h3 class="fw-bold mb-3">General Settings</h3>
             </div>
             <div class="ms-md-auto py-2 py-md-0">
-                <a href="{{ route('admin.generalsettings.create') }}" class="btn btn-primary btn-round me-2"><i class="fa fa-plus"></i> Add General Settings</a>
+                <!-- Check if settings data exists; if not, show the "Add General Settings" button -->
+                @if($settings->isEmpty())
+                    <a href="{{ route('admin.generalsettings.create') }}" class="btn btn-primary btn-round me-2">
+                        <i class="fa fa-plus"></i> Add General Settings
+                    </a>
+                @endif
             </div>
         </div>
 
@@ -27,6 +32,7 @@
                                         <th>Logo</th>
                                         <th>Contact</th>
                                         <th>Email</th>
+                                        <th>Whatsapp contact</th>
                                         <th>Address Line 1</th>
                                         <th>City</th>
                                         <th>State</th>
@@ -43,9 +49,10 @@
                                     @foreach($settings as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset('storage/'.$row->logo) }}" style="height: 90px; width: 120px;"></td>
+                                        <td><img src="{{ asset($row->logo) }}" style="height: 90px; width: 120px;"></td>
                                         <td>{{ $row->contact }}</td>
                                         <td>{{ $row->email }}</td>
+                                        <td>{{ $row->whatsappContact }}</td>
                                         <td>{{ $row->address_line1 }}</td>
                                         <td>{{ $row->city }}</td>
                                         <td>{{ $row->state }}</td>

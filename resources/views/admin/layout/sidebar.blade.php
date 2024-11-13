@@ -58,7 +58,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.generalSettings') }}" class="collapsed" aria-expanded="false">
+                    <a href="{{ route('admin.generalsettings') }}" class="collapsed" aria-expanded="false">
                         <i class="fa fa-cog"></i> 
                         <p>General Settings</p>
                     </a>
