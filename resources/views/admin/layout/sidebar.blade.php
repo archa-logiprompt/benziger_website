@@ -73,6 +73,23 @@
                     </li>
                 @endif
 
+                @if (in_array('research_area', $permissions) || $data->role == 1)
+                    <li class="nav-item {{ Request::is('admin/researcharea') ? 'active' : '' }}">
+                        <a href="{{ route('admin.researcharea') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-users"></i>
+                            <p>Research Area</p>
+                        </a>
+                    </li>
+                @endif
+                {{-- @if (in_array('journels', $permissions) || $data->role == 1) --}}
+                <li class="nav-item {{ Request::is('staff/viewjournal') ? 'active' : '' }}">
+                    <a href="{{ route('journal.index') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-users"></i>
+                        <p>Journels</p>
+                    </a>
+                </li>
+                {{-- @endif --}}
+
             </ul>
         </div>
     </div>

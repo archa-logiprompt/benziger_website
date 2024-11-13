@@ -2,9 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JournalController;
-use App\Http\Controllers\JournalAuthorController;
-// use App\Http\Controllers\Admin\ResearchAreaController;
 use App\Http\Controllers\ResearchareaController;
 
 /*

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 use App\Models\Department;
+use App\Models\Journal;
 use Illuminate\Support\Facades\DB;
 // use DB;
 class StaffController extends Controller
@@ -91,4 +92,6 @@ class StaffController extends Controller
         $post->update($request->all());
         return redirect()->route('admin.staff')->with('success', 'staff updated successfully.');
     }
+
+    
 }

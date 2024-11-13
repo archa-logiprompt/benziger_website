@@ -50,6 +50,23 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('admin/staff/update/{id}', [StaffController::class, 'update']);
 
 
+    Route::get('staff/journal', [JournalController::class, 'viewAllJournal'])->name('journal.index');
+    Route::get('staff/journal/viewById/{id}', [JournalController::class, 'viewJournalById'])->name('journal.view');
+    Route::post('staff/journal/reject', [JournalController::class, 'rejectJournel'])->name('journal.reject');
+    Route::post('staff/journal/accept', [JournalController::class, 'acceptJournel'])->name('journal.accept');
+
+
+
+    Route::get('admin/roles/index', [AdminController::class, 'viewRole'])->name('admin.roles.view');
+    Route::get('admin/roles/view', [AdminController::class, 'CreateRoleView'])->name('admin.role.createView');
+    Route::post('admin/role/store', [AdminController::class, 'createRole'])->name('admin.role.store');
+    Route::get('admin/role/delete/{id}', [AdminController::class, 'deleteRole'])->name('admin.role.delete');
+    Route::get('admin/role/edit/{id}', [AdminController::class, 'edit']);
+    Route::post('admin/role/update/{id}', [AdminController::class, 'updateRole'])->name('admin.role.update');
+    Route::get('admin/role/assign/{id}', [AdminController::class, 'assign']);
+    Route::post('admin/role/assign', [AdminController::class, 'AssignRole'])->name('admin.role.assignrole');
+
+
     // adding journal and journal author
     Route::post('admin/user/journal', [JournalController::class, 'create'])->name('admin.user.journal');
     Route::post('admin/user/journalAuthor', [JournalAuthorController::class, 'createAuthor'])->name('admin.user.journal');
