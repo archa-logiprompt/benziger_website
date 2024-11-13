@@ -43,7 +43,7 @@ class sendEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'admin.journel.view',
+            view: 'emails.welcome',
         );
     }
 
