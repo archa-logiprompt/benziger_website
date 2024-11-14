@@ -13,7 +13,6 @@
     <form action="{{ route('admin.generalsettings.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
-        <div class="card-body">
             <div class="form-group">
                 <label for="logo">Logo</label>
                 <div>

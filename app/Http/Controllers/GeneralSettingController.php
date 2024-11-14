@@ -15,9 +15,10 @@ class GeneralSettingController extends Controller
         return  view('admin.generalSettings.create');
     }
 
+    // create
     public function store(Request $request)
     {
-        // Validate the input
+
         $request->validate([
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'contact',
@@ -64,8 +65,7 @@ class GeneralSettingController extends Controller
         return redirect('admin/generalsettings')->with('success', 'Settings added successfully!');
     }
 
-
-
+    // view
     public function index()
     {
         $settings = GeneralSettings::all();
@@ -73,13 +73,14 @@ class GeneralSettingController extends Controller
         return view('admin.generalSettings.index', compact('settings'));
     }
 
+    // delete
     public function destroy($id)
     {
         GeneralSettings::where('id', $id)->delete();
         return redirect('admin/generalsettings')->with('success', 'General Settings deleted successfully!');
     }
 
-
+    // edit
     public function edit($id)
     {
 
@@ -87,23 +88,23 @@ class GeneralSettingController extends Controller
         return view('admin.generalSettings.edit', compact('settings'));
     }
 
-
+    // update
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-           'contact' => 'required|string|max:255',
-        'whatsappContact' => 'nullable|string|max:255',
-        'email' => 'nullable|string',
-        'address_line1' => 'nullable|string|max:255',
-        'address_line2' => 'nullable|string|max:255',
-        'city' => 'nullable|string|max:255',
-        'state' => 'nullable|string|max:255',
-        'country' => 'nullable|string|max:255',
-        'postalCode' => 'nullable|string|max:20',
-        'apiKey' => 'nullable|string|max:255',
-        'apiSecret' => 'nullable|string|max:255',
-        'payment' => 'nullable|boolean',
-        'amount' => 'nullable|numeric'
+            'contact' => 'required|string|max:255',
+            'whatsappContact' => 'nullable|string|max:255',
+            'email' => 'nullable|string',
+            'address_line1' => 'nullable|string|max:255',
+            'address_line2' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'postalCode' => 'nullable|string|max:20',
+            'apiKey' => 'nullable|string|max:255',
+            'apiSecret' => 'nullable|string|max:255',
+            'payment' => 'nullable|boolean',
+            'amount' => 'nullable|numeric'
         ]);
 
         $logoPath = null;

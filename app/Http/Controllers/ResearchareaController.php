@@ -7,20 +7,19 @@ use App\Models\ResearchArea;
 
 class ResearchareaController extends Controller
 {
-
+// view form
     public function create()
     {
         return  view('admin.researchArea.create');
     }
 
+    // create
     public function store(Request $request)
     {
-        // Validate the input data
         $request->validate([
             'researchArea' => 'required',
             'description',
         ]);
-
 
         ResearchArea::create([
             'researchArea' => $request->researchArea,
@@ -30,7 +29,7 @@ class ResearchareaController extends Controller
         return redirect('admin/researcharea')->with('success', 'research area added successfully!');
     }
 
-
+    // view
     public function index()
     {
         $researchAreas = ResearchArea::all();
@@ -38,22 +37,21 @@ class ResearchareaController extends Controller
         return view('admin.researchArea.index', compact('researchAreas'));
     }
 
+    // delete
     public function destroy($id)
     {
-
         ResearchArea::where('id', $id)->delete();
         return redirect('admin/researcharea')->with('success', 'research area deleted successfully!');
     }
 
-
+    // edit
     public function edit($id)
     {
-
         $service = ResearchArea::where('id', $id)->first();
-        // dd($researchArea);
         return view('admin.researchArea.edit', compact('service'));
     }
 
+    // update
     public function update(Request $request, $id)
     {
         $request->validate([

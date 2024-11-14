@@ -8,12 +8,12 @@
                 <h3 class="fw-bold mb-3">General Settings</h3>
             </div>
             <div class="ms-md-auto py-2 py-md-0">
-                <!-- Check if settings data exists; if not, show the "Add General Settings" button -->
                 @if($settings->isEmpty())
-                    <a href="{{ route('admin.generalsettings.create') }}" class="btn btn-primary btn-round me-2">
-                        <i class="fa fa-plus"></i> Add General Settings
-                    </a>
+                <a href="{{ route('admin.generalsettings.create') }}" class="btn btn-primary btn-round me-2" >
+                    <i class="fa fa-plus"></i> Add General Settings
+                </a>
                 @endif
+
             </div>
         </div>
 

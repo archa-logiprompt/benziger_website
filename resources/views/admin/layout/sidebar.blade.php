@@ -58,6 +58,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('admin.notifications') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-bell"></i> 
+                        <p>Notifications</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('admin.generalsettings') }}" class="collapsed" aria-expanded="false">
                         <i class="fa fa-cog"></i> 
                         <p>General Settings</p>

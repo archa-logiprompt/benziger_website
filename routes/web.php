@@ -10,7 +10,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\JournalAuthorController;
 use App\Http\Controllers\ResearchareaController;
 use App\Http\Controllers\GeneralSettingController;
-
+use App\Http\Controllers\NotificationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,4 +72,13 @@ Route::middleware([AdminMiddleware::class])->group(function () {
  Route::get('admin/generalsettings/edit/{id}', [GeneralSettingController::class, 'edit']);
  Route::post('admin/generalsettings/update/{id}', [GeneralSettingController::class, 'update']);
 
+
+  // Notifications crud
+  Route::get('admin/notifications', [NotificationsController::class, 'index'])->name('admin.notifications');
+  Route::get('admin/notifications/create', [NotificationsController::class, 'create'])->name('admin.notifications.create');
+  Route::post('admin/notifications/store', [NotificationsController::class, 'store'])->name('admin.notifications.store');
+  Route::get('admin/notifications/delete/{id}', [NotificationsController::class, 'destroy']);
+  Route::get('admin/notifications/edit/{id}', [NotificationsController::class, 'edit']);
+  Route::post('admin/notifications/update/{id}', [NotificationsController::class, 'update']);
+ 
 });
