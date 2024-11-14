@@ -6,6 +6,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\BannerImageController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\JournalAuthorController;
 use App\Http\Controllers\ResearchareaController;
@@ -64,21 +65,28 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('admin/researcharea/edit/{id}', [ResearchareaController::class, 'edit']);
     Route::post('admin/researcharea/update/{id}', [ResearchareaController::class, 'update']);
 
- // general setting crud
- Route::get('admin/generalsettings', [GeneralSettingController::class, 'index'])->name('admin.generalsettings');
- Route::get('admin/generalsettings/create', [GeneralSettingController::class, 'create'])->name('admin.generalsettings.create');
- Route::post('admin/generalsettings/store', [GeneralSettingController::class, 'store'])->name('admin.generalsettings.store');
- Route::get('admin/generalsettings/delete/{id}', [GeneralSettingController::class, 'destroy']);
- Route::get('admin/generalsettings/edit/{id}', [GeneralSettingController::class, 'edit']);
- Route::post('admin/generalsettings/update/{id}', [GeneralSettingController::class, 'update']);
+    // general setting crud
+    Route::get('admin/generalsettings', [GeneralSettingController::class, 'index'])->name('admin.generalsettings');
+    Route::get('admin/generalsettings/create', [GeneralSettingController::class, 'create'])->name('admin.generalsettings.create');
+    Route::post('admin/generalsettings/store', [GeneralSettingController::class, 'store'])->name('admin.generalsettings.store');
+    Route::get('admin/generalsettings/delete/{id}', [GeneralSettingController::class, 'destroy']);
+    Route::get('admin/generalsettings/edit/{id}', [GeneralSettingController::class, 'edit']);
+    Route::post('admin/generalsettings/update/{id}', [GeneralSettingController::class, 'update']);
 
 
-  // Notifications crud
-  Route::get('admin/notifications', [NotificationsController::class, 'index'])->name('admin.notifications');
-  Route::get('admin/notifications/create', [NotificationsController::class, 'create'])->name('admin.notifications.create');
-  Route::post('admin/notifications/store', [NotificationsController::class, 'store'])->name('admin.notifications.store');
-  Route::get('admin/notifications/delete/{id}', [NotificationsController::class, 'destroy']);
-  Route::get('admin/notifications/edit/{id}', [NotificationsController::class, 'edit']);
-  Route::post('admin/notifications/update/{id}', [NotificationsController::class, 'update']);
- 
+    // Notifications crud
+    Route::get('admin/notifications', [NotificationsController::class, 'index'])->name('admin.notifications');
+    Route::get('admin/notifications/create', [NotificationsController::class, 'create'])->name('admin.notifications.create');
+    Route::post('admin/notifications/store', [NotificationsController::class, 'store'])->name('admin.notifications.store');
+    Route::get('admin/notifications/delete/{id}', [NotificationsController::class, 'destroy']);
+    Route::get('admin/notifications/edit/{id}', [NotificationsController::class, 'edit']);
+    Route::post('admin/notifications/update/{id}', [NotificationsController::class, 'update']);
+
+    // banner image crud
+    Route::get('admin/bannerImage', [BannerImageController::class, 'index'])->name('admin.bannerImage');
+    Route::get('admin/bannerImage/create', [BannerImageController::class, 'create'])->name('admin.bannerImage.create');
+    Route::post('admin/bannerImage/store', [BannerImageController::class, 'store'])->name('admin.bannerImage.store');
+    Route::get('admin/bannerImage/delete/{id}', [BannerImageController::class, 'destroy']);
+    Route::get('admin/bannerImage/edit/{id}', [BannerImageController::class, 'edit']);
+    Route::post('admin/bannerImage/update/{id}', [BannerImageController::class, 'update']);
 });

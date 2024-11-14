@@ -65,13 +65,20 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('admin.bannerImage') }}" class="collapsed" aria-expanded="false">
+                        <i class="fa fa-image"></i> 
+                        <p>Banner Images</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('admin.generalsettings') }}" class="collapsed" aria-expanded="false">
                         <i class="fa fa-cog"></i> 
                         <p>General Settings</p>
                     </a>
                 </li>
 
-
+                
             </ul>
         </div>
     </div>

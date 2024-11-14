@@ -20,7 +20,7 @@ class GeneralSettingController extends Controller
     {
 
         $request->validate([
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'contact' => 'required|string|max:255',
             'whatsappContact' => 'required|string|max:255',
             'email' => 'required|string',
@@ -34,7 +34,11 @@ class GeneralSettingController extends Controller
             'apiSecret' => 'nullable|string|max:255',
             'payment' => 'required|boolean',
             'amount' => 'nullable|numeric'
-        ]);
+        ],
+    [
+        'logo.mimes' => 'Only jpeg, png, jpg, gif, svg extensions are allowed!',
+    ]
+);
 
         $logoPath = null;
 
@@ -92,6 +96,7 @@ class GeneralSettingController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
+            'logo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'contact' => 'required|string|max:255',
             'whatsappContact' => 'required|string|max:255',
             'email' => 'required|string',
@@ -105,7 +110,11 @@ class GeneralSettingController extends Controller
             'apiSecret' => 'nullable|string|max:255',
             'payment' => 'required|boolean',
             'amount' => 'nullable|numeric'
-        ]);
+        ],
+        [
+            'logo.mimes' => 'Only jpeg, png, jpg, gif, svg extensions are allowed!',
+        ]
+    );
 
         $logoPath = null;
 

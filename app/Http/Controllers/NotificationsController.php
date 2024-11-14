@@ -23,12 +23,14 @@ class NotificationsController extends Controller
     // create
     public function store(Request $request)
     {
+
         $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            
-        ]);
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],
+        ['image.mime' => 'Only jpeg, png, jpg, gif, svg extensions are allowed!']
+        );
 
         $imagePath = null;
 
@@ -70,8 +72,10 @@ class NotificationsController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ],
+        ['image.mime' => 'Only jpeg, png, jpg, gif, svg extensions are allowed!']
+    );
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

@@ -38,8 +38,11 @@
 
             <div class="form-group">
                 <label for="image">Picture</label>
-                <input type="file" name="image" accept="image/*">
-                @if ($errors->has('image'))
+                <input type="file" name="image"  
+                accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+
+                >
+                @if ($errors->has('image'))   
                     <div class="alert alert-danger mt-2">
                         {{ $errors->first('image') }}
                     </div>
