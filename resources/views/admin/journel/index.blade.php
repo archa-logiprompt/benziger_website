@@ -4,7 +4,9 @@
         $userId = Auth::user()->id;
         $role = Auth::user()->role;
     @endphp
+    {{-- dd($journalData); --}}
     <div class="container">
+
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
             <div>
                 <h3 class="fw-bold mb-3">Jorunel</h3>
@@ -39,23 +41,23 @@
                                 <tfoot>
 
                                     @foreach ($journalData as $row)
-                                        @if ($row->staff_id == $userId || $role == 1)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $row->name }}</td>
-                                                <td>{{ $row->paper_title }}</td>
-                                                <td>{{ $row->department_id }}</td>
-                                                <td>+{{ $row->country_code }} {{ $row->mobile }}</td>
-                                                <td>{{ $row->paper }}</td>
-                                                <td>
-                                                    {{ $truncated = Str::of($row->abstract)->limit(20) }}</td>
-                                                <td>{{ $row->key_words }}</td>
-                                                <td>
-                                                    <a href="{{ URL::to('staff/journal/viewById/' . $row->id) }}"
-                                                        class="btn btn-warning btn-sm"><i class="fa-solid fa-eye"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endif
+                                        {{-- @if ($row->staff_id == $userId || $role == 1) --}}
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $row->journalAuthor[0]->name }}</td>
+                                            <td>{{ $row->paper_title }}</td>
+                                            <td>{{ $row->department_id }}</td>
+                                            <td>+{{ $row->country_code }} {{ $row->mobile }}</td>
+                                            <td>{{ $row->paper }}</td>
+                                            <td>
+                                                {{ $truncated = Str::of($row->abstract)->limit(20) }}</td>
+                                            <td>{{ $row->key_words }}</td>
+                                            <td>
+                                                <a href="{{ URL::to('staff/journal/viewById/' . $row->id) }}"
+                                                    class="btn btn-warning btn-sm"><i class="fa-solid fa-eye"></i></a>
+                                            </td>
+                                        </tr>
+                                        {{-- @endif --}}
                                     @endforeach
                                 </tfoot>
 

@@ -1,4 +1,5 @@
 @extends('admin.admin_layouts');
+
 @section('body')
     @php
         $userId = Auth::user()->id;
@@ -7,13 +8,8 @@
         $email = $journalDataById[0]->email;
         $name = $journalDataById[0]->name;
         $title = $journalDataById[0]->paper_title;
-        $departmentId = $journalDataById[0]->department_id; 
-
+        $departmentId = $journalDataById[0]->department_id;
     @endphp
-
-
-
-
     <div class="container">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
             <div>
@@ -67,7 +63,7 @@
                                                 <input type="hidden" name="journelid" value={{ $journalId }}>
                                                 <input type="hidden" name="email" value={{ $email }}>
                                                 <input type="hidden" name="departmentid" value={{ $departmentId }}>
-                                                @if ($role == 2 && checkJournalStatus($userId,$journalId)) 
+                                                @if ($role == 2 && !checkJournalStatus($userId, $journalId))
                                                     <div class="card-footer">
 
                                                         <button type="submit" href=""

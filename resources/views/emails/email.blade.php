@@ -63,6 +63,11 @@
 
             <p>Thank you for your understanding and commitment to academic excellence.</p>
 
+            <a href={{ route('admin.role.createView', $mailData['random']) }}>click here </a>
+
+
+
+
         </div>
 
     </div>

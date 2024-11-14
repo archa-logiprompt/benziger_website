@@ -15,4 +15,11 @@ class Department extends Model
         'image'
     ];
 
+
+    public function journal(){
+        return $this->hasMany(Journal::class);
+    }
+    public function staff(){
+        return $this->hasMany(Staff::class);
+    }
 }

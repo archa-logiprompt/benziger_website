@@ -1,8 +1,8 @@
 <?php
 
+use App\Models\JournelStatus;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 if (! function_exists('getUser')) {
     function getUser(int $id): ?object
@@ -12,29 +12,21 @@ if (! function_exists('getUser')) {
 }
 
 if (! function_exists('getCurrentUser')) {
-    function getCurrentUser() 
+    function getCurrentUser()
     {
         return Auth::user();
     }
 }
 if (! function_exists('checkJournalStatus')) {
-    function checkJournalStatus() 
+    function checkJournalStatus($userid, $journalId)
     {
-        // $status = DB::where();
-        // if($status){
-        //     return true;
-        // }else{
-        //     return false;
 
-        // }
+        $status = JournelStatus::where(['staffid' => $userid, 'journelid' => $journalId])->get();
+        if ($status->count() > 0) {
+            return true;
+        } else {
+            return false;
+        }
         return false;
     }
 }
-
-// if (! function_exists('getUserCompany')) {
-//     function getUserCompany(): ?object
-//     {
-//         $companyId = Auth::user()->comp_id;
-//         return Company::find($companyId);
-//     }
-// }

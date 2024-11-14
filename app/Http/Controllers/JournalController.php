@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\sendMail;
-
+use Illuminate\Support\Facades\Auth;
 
 class JournalController extends Controller
 {
@@ -39,12 +39,27 @@ class JournalController extends Controller
 
     public function viewAllJournal()
     {
-        $journalData  = DB::table('journal')
-            ->join('journal_author', 'journal_author.journal_id', 'journal.id')
-            ->join('staff', 'staff.department_id', 'journal.department_id')
-            ->select('Journal.*', 'journal_author.*', 'staff.name as staff_name', 'staff.id as staff_id')
-            ->where('journal_author.main', 1)
-            ->get();
+        // $journalData  = DB::table('journal')
+        //     ->join('journal_author', 'journal_author.journal_id', 'journal.id')
+        //     ->join('staff', 'staff.department_id', 'journal.department_id')
+        //     ->select('Journal.*', 'journal_author.*', 'staff.name as staff_name', 'staff.id as staff_id')
+        //     ->where('journal_author.main', 1)
+        //     ->get();
+
+
+        $user = Auth::user();
+        if ($user->role == 1) {
+            $journalData  = Journal::where(['status' => 0])->with(['department', 'department.staff', 'journalAuthor'])->get();
+        } else {
+
+            $journalData  = Journal::where(['status' => 0])->with(['department', 'journalAuthor'])
+                ->whereHas('department', function ($query) use ($user) {
+                    $query->where('id', $user->staff[0]->department_id);
+                })
+                ->get();
+        }
+
+
         return view('admin.journel.index', compact('journalData'));
     }
 
@@ -53,9 +68,10 @@ class JournalController extends Controller
     {
         $journalDataById  = DB::table('journal')
             ->join('journal_author', 'journal_author.journal_id', 'journal.id')
-            ->where('journal_author.id', $id)
+            ->where('journal.id', $id)
             ->where('journal_author.main', 1)
             ->get();
+        // dd($journalDataById);
         $journalStatus = DB::table('journel_status')->get();
         return view('admin.journel.view', compact('journalDataById', 'journalStatus'));
     }
@@ -63,6 +79,7 @@ class JournalController extends Controller
     public function rejectJournel(Request $request)
     {
         $journelId = $request->journelid;
+
         JournelStatus::create([
             'staffid' => $request->staffid,
             'journelid' => $request->journelid,
@@ -72,14 +89,20 @@ class JournalController extends Controller
             "updated_at" =>  Carbon::now()
         ]);
 
+        // $len =22;
+
+        // $rand = ;
         Mail::to($request->email)->send(
             (new sendEmail([
                 'name' => $request->name,
                 'reason' => $request->reason,
                 'title' => $request->title,
+                'random' => 'BNZ' . substr(str_shuffle(time()), 0, 3),
             ]))->from('nsaslam55@gmail.com', 'Benziger')
         );
-        Journal::where('id', $journelId)
+        JournelStatus::where(['journelId' => $journelId])->delete();
+
+        Journal::where(['id' => $journelId])
             ->update([
                 'status' => 2
             ]);
@@ -98,7 +121,6 @@ class JournalController extends Controller
         $staff_count = DB::table('staff')
             ->where('department_id', $departmentId)
             ->get();
-
 
         if ($staff_count->count() !==  $status_count->count()) {
             JournelStatus::create([

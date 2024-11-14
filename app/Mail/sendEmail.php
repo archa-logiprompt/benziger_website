@@ -32,7 +32,7 @@ class sendEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Send Email',
+            subject: 'Reason for rejection ',
         );
     }
 
@@ -44,7 +44,7 @@ class sendEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.welcome',
+            view: 'emails.email',
         );
     }
 

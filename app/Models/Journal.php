@@ -17,4 +17,14 @@ class Journal extends Model
         'abstract',
         'key_words'
     ];
+    // protected $guarded = ['id'];
+
+
+    public function department(){
+       return $this->belongsTo(Department::class);
+    }
+    public function journalAuthor(){
+       return $this->hasMany(JournalAuthor::class);
+    }
+    
 }

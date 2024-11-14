@@ -20,4 +20,8 @@ class Staff extends Model
         'userid',
         'roleid'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class,'userid');
+    }
 }
