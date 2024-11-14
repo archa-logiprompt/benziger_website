@@ -2,9 +2,15 @@
 @section('body')
     @php
         $userId = Auth::user()->id;
+        $role = Auth::user()->role;
         $journalId = $journalDataById[0]->journal_id;
         $email = $journalDataById[0]->email;
+        $name = $journalDataById[0]->name;
+        $title = $journalDataById[0]->paper_title;
+        $departmentId = $journalDataById[0]->department_id; 
+
     @endphp
+
 
 
 
@@ -14,8 +20,8 @@
                 <h3 class="fw-bold mb-3">Jorunel</h3>
             </div>
             <div class="ms-md-auto py-2 py-md-0">
-                {{-- <a href="{{route('admin.staff.create')}}" class="btn btn-primary btn-round me-2"><i class="fa fa-plus"></i>
-                Add Staff</a> --}}
+                <a href="{{ route('journal.index') }}" class="btn btn-primary btn-round me-2"><i class="fa fa-eye"></i>
+                    View all Jorunel</a>
             </div>
         </div>
         <div class="row">
@@ -47,8 +53,8 @@
                                                         </div>
                                                     </div>
 
-                                                    <p class="mt-2"><strong>Research Area:</strong>
-                                                        {{ $row->research_area }}
+                                                    <p class="mt-2"><strong>Department:</strong>
+                                                        {{ $row->department_id }}
                                                     </p>
                                                     <p><strong>Mobile:</strong> +{{ $row->country_code }}
                                                         {{ $row->mobile }}
@@ -60,14 +66,20 @@
                                                 <input type="hidden" name="staffid" value={{ $userId }}>
                                                 <input type="hidden" name="journelid" value={{ $journalId }}>
                                                 <input type="hidden" name="email" value={{ $email }}>
-                                                <div class="card-footer">
-                                                    <button type="submit" href="" class="btn btn-success btn-sm">
-                                                        <i class="fa-solid fa-check"></i> Approve
-                                                    </button>
-                                                    <a class="btn btn-danger btn-sm" id="modal-popup-button">
-                                                        <i class="fa-solid fa-ban"></i> Reject
-                                                    </a>
-                                                </div>
+                                                <input type="hidden" name="departmentid" value={{ $departmentId }}>
+                                                @if ($role == 2 && checkJournalStatus($userId,$journalId)) 
+                                                    <div class="card-footer">
+
+                                                        <button type="submit" href=""
+                                                            class="btn btn-success btn-sm">
+                                                            <i class="fa-solid fa-check"></i> Approve
+                                                        </button>
+                                                        <a class="btn btn-danger btn-sm" id="modal-popup-button">
+                                                            <i class="fa-solid fa-ban"></i> Reject
+                                                        </a>
+
+                                                    </div>
+                                                @endif
                                             </div>
                                         @endforeach
                                     </div>
@@ -99,6 +111,8 @@
                         <input type="hidden" name="staffid" value={{ $userId }}>
                         <input type="hidden" name="journelid" value={{ $journalId }}>
                         <input type="hidden" name="email" value={{ $email }}>
+                        <input type="hidden" name="name" value={{ $name }}>
+                        <input type="hidden" name="title" value={{ $title }}>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id='close-modal-btn' class="btn  btn-outline-danger"

@@ -48,8 +48,21 @@
     <div class="container">
 
         <div class="message">
-            {{-- <p>Dear {{ $mailData['name'] }},</p> --}}
-            <p>Thank you for providing your details Your Company Name.
+            <p>Dear {{ $mailData['name'] }},</p>
+            <p>Thank you for submitting your journal, titled "{{ $mailData['title'] }}". We appreciate the time and
+                effort you have invested in your research, and it has been carefully reviewed by our editorial team and
+                external reviewers.</p>
+
+            <p><strong>Reason for Rejection:</strong><br>
+                {{ $mailData['reason'] }}
+            </p>
+
+            <p>We encourage you to revise your journal based on the feedback provided and address the reasons stated
+                above. Once these corrections are made, you are welcome to resubmit your journal for further review.
+                Our team will be happy to consider your revised submission.</p>
+
+            <p>Thank you for your understanding and commitment to academic excellence.</p>
+
         </div>
 
     </div>

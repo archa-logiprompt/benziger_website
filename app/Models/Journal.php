@@ -10,8 +10,8 @@ class Journal extends Model
     use HasFactory;
     protected $table = "journal";
     protected $fillable = [
-        'paper_title', 
-        'research_area', 
+        'paper_title',
+        'department_id',
         'country_code',
         'paper',
         'abstract',

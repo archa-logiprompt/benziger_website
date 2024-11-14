@@ -131,8 +131,6 @@ class AdminController extends Controller
 
     public function AssignRole(Request $request)
     {
-
-
         $categories = PermissionCategory::all()->pluck('id');
         $category_selected = $request->category_id;
         $role_id = $request->role_id;
@@ -146,5 +144,6 @@ class AdminController extends Controller
             ];
             AssignPermission::create($arr);
         }
+        return redirect()->route('admin.roles.view');
     }
 }
