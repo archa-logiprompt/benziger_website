@@ -19,11 +19,21 @@
             <div class="form-group">
                 <label for="">Title</label>
                 <input type="text" name="title" class="form-control" value="{{ old('title', $data->title) }}" autofocus>
+                @if ($errors->has('title'))
+                    <div class="alert alert-danger mt-2">
+                        {{ $errors->first('title') }}
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">
                 <label for="">Description</label>
                 <textarea name="description" class="form-control" cols="30" rows="4">{{ old('description', $data->description) }}</textarea>
+                @if ($errors->has('description'))
+                    <div class="alert alert-danger mt-2">
+                        {{ $errors->first('description') }}
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">
@@ -38,6 +48,11 @@
                 <label for="">Change Image</label>
                 <div>
                     <input type="file" name="image" accept="image/*">
+                    @if ($errors->has('image'))
+                    <div class="alert alert-danger mt-2">
+                        {{ $errors->first('image') }}
+                    </div>
+                @endif
                 </div>
             </div>
             

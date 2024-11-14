@@ -16,11 +16,21 @@
             <div class="form-group">
                 <label for="">Research Area *</label>
                 <input type="text" name="researchArea" class="form-control" value="{{ old('researchArea') }}" autofocus>
+                @if ($errors->has('researchArea'))
+                    <div class="alert alert-danger mt-2">
+                        {{ $errors->first('researchArea') }}
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">
                 <label for="">Description</label>
                 <input type="text" name="description" class="form-control" value="{{ old('description') }}" autofocus>
+                @if ($errors->has('description'))
+                    <div class="alert alert-danger mt-2">
+                        {{ $errors->first('description') }}
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">

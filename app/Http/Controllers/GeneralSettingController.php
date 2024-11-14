@@ -21,19 +21,19 @@ class GeneralSettingController extends Controller
 
         $request->validate([
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'contact',
-            'whatsappContact',
-            'email',
-            'address_line1',
-            'address_line2',
-            'city',
-            'state',
-            'country',
-            'postalCode',
-            'apiKey',
-            'apiSecret',
-            'payment',
-            'amount'
+            'contact' => 'required|string|max:255',
+            'whatsappContact' => 'required|string|max:255',
+            'email' => 'required|string',
+            'address_line1' => 'required|string|max:255',
+            'address_line2' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'postalCode' => 'required|string|max:20',
+            'apiKey' => 'nullable|string|max:255',
+            'apiSecret' => 'nullable|string|max:255',
+            'payment' => 'required|boolean',
+            'amount' => 'nullable|numeric'
         ]);
 
         $logoPath = null;
@@ -93,17 +93,17 @@ class GeneralSettingController extends Controller
     {
         $validatedData = $request->validate([
             'contact' => 'required|string|max:255',
-            'whatsappContact' => 'nullable|string|max:255',
-            'email' => 'nullable|string',
-            'address_line1' => 'nullable|string|max:255',
-            'address_line2' => 'nullable|string|max:255',
-            'city' => 'nullable|string|max:255',
-            'state' => 'nullable|string|max:255',
-            'country' => 'nullable|string|max:255',
-            'postalCode' => 'nullable|string|max:20',
+            'whatsappContact' => 'required|string|max:255',
+            'email' => 'required|string',
+            'address_line1' => 'required|string|max:255',
+            'address_line2' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'postalCode' => 'required|string|max:20',
             'apiKey' => 'nullable|string|max:255',
             'apiSecret' => 'nullable|string|max:255',
-            'payment' => 'nullable|boolean',
+            'payment' => 'required|boolean',
             'amount' => 'nullable|numeric'
         ]);
 

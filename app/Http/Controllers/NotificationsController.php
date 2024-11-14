@@ -24,9 +24,10 @@ class NotificationsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title',
-            'description',
+            'title' => 'required|string',
+            'description' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            
         ]);
 
         $imagePath = null;
