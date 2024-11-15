@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GeneralSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +42,4 @@ use Illuminate\Support\Facades\Route;
 //  Route::get('admin/notifications/delete/{id}', [NotificationsController::class, 'destroy']);
 //  Route::get('admin/notifications/edit/{id}', [NotificationsController::class, 'edit']);
 //  Route::post('admin/notifications/update/{id}', [NotificationsController::class, 'update']);
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');

@@ -19,35 +19,23 @@ class StaffController extends Controller
 
     public function index()
     {
-// mycode
-    //     $staff = Staff::all();
-    //     return view('admin.staff.index', compact('staff'));
-    // }
-
-    // public function create()
-    // {
-    //     $department = Department::all();
-    //     return view('admin.staff.create', compact('department'));
-
-// Aslam
         $staff = Staff::all();
         $role = Role::all();
-
-        return view('admin.staff.index', compact('staff', 'role'));
+        return view('admin.staff.index', compact('staff','role'));
     }
+
     public function create()
     {
-
         $department = Department::all();
         $role = Role::all();
-        return view('admin.staff.create', compact('department', 'role'));
-
+        return view('admin.staff.create', compact('department','role'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
+// 'email' => 'required|email|unique:users,email',
 
             'email' => [
                 'required',
