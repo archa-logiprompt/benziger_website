@@ -27,6 +27,7 @@
                                         <form action="{{ route('user.otp') }}" method="POST">
                                             @csrf
                                             <input type="text" name="otp" required />
+                                            <input type="hidden" name="uniqueid" value={{ $id }} />
                                             <button type="submit">submit</button>
                                         </form>
 

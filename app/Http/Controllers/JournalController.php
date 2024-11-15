@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Journal;
 use App\Models\JournelStatus;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\sendMail;
 use Illuminate\Support\Facades\Auth;
 
 class JournalController extends Controller
@@ -17,6 +15,7 @@ class JournalController extends Controller
     public function createJournal(Request $request)
     {
         // Validate the input data
+        $uniqueId = ('BNZ' . substr(str_shuffle(time()), 0, 3));
         $request->validate([
             'paper_title' => 'required',
             'department_id' => 'required',
@@ -32,6 +31,7 @@ class JournalController extends Controller
             'paper' => $request->paper,
             'abstract' => $request->abstract,
             'key_words' => $request->key_words,
+            'unique_id' => $uniqueId,
         ]);
 
         return view('welcome');
@@ -39,13 +39,6 @@ class JournalController extends Controller
 
     public function viewAllJournal()
     {
-        // $journalData  = DB::table('journal')
-        //     ->join('journal_author', 'journal_author.journal_id', 'journal.id')
-        //     ->join('staff', 'staff.department_id', 'journal.department_id')
-        //     ->select('Journal.*', 'journal_author.*', 'staff.name as staff_name', 'staff.id as staff_id')
-        //     ->where('journal_author.main', 1)
-        //     ->get();
-
 
         $user = Auth::user();
         if ($user->role == 1) {
@@ -58,7 +51,6 @@ class JournalController extends Controller
                 })
                 ->get();
         }
-
 
         return view('admin.journel.index', compact('journalData'));
     }
@@ -74,8 +66,6 @@ class JournalController extends Controller
             ->where('journal_author.main', 1)
             ->get();
 
-        // dd($journalDataById);
-
         $journalStatus = DB::table('journel_status')->get();
         return view('admin.journel.view', compact('journalDataById', 'journalStatus'));
     }
@@ -83,6 +73,7 @@ class JournalController extends Controller
     public function rejectJournel(Request $request)
     {
         $journelId = $request->journelid;
+        $uniqueId = $request->uniqueid;
 
         $digits = 4;
         $otp = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
@@ -92,8 +83,6 @@ class JournalController extends Controller
             'journelid' => $request->journelid,
             'reason' => $request->reason,
             'status' => 0,
-            "created_at" => Carbon::now(),
-            "updated_at" =>  Carbon::now()
         ]);
 
         Mail::to($request->email)->send(
@@ -101,8 +90,7 @@ class JournalController extends Controller
                 'name' => $request->name,
                 'reason' => $request->reason,
                 'title' => $request->title,
-                'random' => 'BNZ' . substr(str_shuffle(time()), 0, 3),
-                'id' => base64_encode($journelId),
+                'random' => $uniqueId,
                 'otp' => $otp,
             ]))->from('nsaslam55@gmail.com', 'Benziger')
         );
@@ -135,8 +123,6 @@ class JournalController extends Controller
                 'journelid' => $request->journelid,
                 'reason' => "Null",
                 'status' => 1,
-                "created_at" => Carbon::now(),
-                "updated_at" =>  Carbon::now()
             ]);
         } else {
             Journal::where('id', $journelId)
@@ -148,33 +134,41 @@ class JournalController extends Controller
         return redirect()->route('journal.index');
     }
 
-
-
-    public function index()
+    public function index($id)
     {
-        return view('frontend.index');
+        return view('frontend.index', compact('id'));
     }
+
 
     public function otpCheck(Request $request)
     {
         $otp = $request->otp;
-        $data = Journal::where(['otp' => $otp])->get();
-        // dd($data);
+        $uniqueId = $request->uniqueid;
 
-        if ($data) {
-            return redirect()->route('user.resubmit');
+
+        $data  = DB::table('journal')
+            ->join('journal_author', 'journal_author.journal_id', 'journal.id')
+            ->join('department', 'department.id', 'journal.department_id')
+            ->select('department.name as dname', 'journal.*', 'journal_author.*')
+            ->where(['otp' => $otp, 'unique_id' => $uniqueId])
+            ->where('journal_author.main', 1)
+            ->get();
+
+        if ($data->count() == 1) {
+            return redirect('user/resubmit/' . $uniqueId);
         } else {
             return redirect()->route('user.index');
         }
     }
 
-    public function reSubmit(Request $request, $id)
+    public function reSubmit($id)
     {
+        // dd($id);
         $journalDataById  = DB::table('journal')
             ->join('journal_author', 'journal_author.journal_id', 'journal.id')
             ->join('department', 'department.id', 'journal.department_id')
             ->select('department.name as dname', 'journal.*', 'journal_author.*')
-            ->where('journal.id', $id)
+            ->where('journal.unique_id', $id)
             ->where('journal_author.main', 1)
             ->get();
 
@@ -183,23 +177,21 @@ class JournalController extends Controller
 
     public function updateJournal(Request $request)
     {
-        $journelid = $request->journelid;
+        $Id = $request->journelid;
 
-        if ($request->file != '') {
+        if ($request->has('file')) {
+
             $path = public_path('uploads');
 
-            //upload new file
-            // $file = $request->file;
             $file = $request->file('file');
             $filename = $file->getClientOriginalName();
-            // dd($filename);
             $file->move($path, $filename);
 
-            Journal::where('id', 1)
+            Journal::where('id', $Id)
                 ->update([
                     'paper' => $filename
                 ]);
         }
-        return redirect()->route('user.resubmit');
+        return redirect()->route('login');
     }
 }

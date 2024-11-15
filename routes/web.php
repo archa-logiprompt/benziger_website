@@ -73,7 +73,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('admin/researcharea/update/{id}', [ResearchareaController::class, 'update']);
 });
 
-Route::get('user/index', [JournalController::class, 'index'])->name('user.index');
+Route::get('user/index/{id}', [JournalController::class, 'index'])->name('user.index');
 Route::post('user/otp/check', [JournalController::class, 'otpCheck'])->name('user.otp');
-Route::get('user/resumbit/{id}', [JournalController::class, 'reSubmit'])->name('user.resubmit');
+Route::get('user/resubmit/{id}', [JournalController::class, 'reSubmit'])->name('user.resubmit');
 Route::post('user/update', [JournalController::class, 'updateJournal'])->name('user.update');

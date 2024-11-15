@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('journal', function (Blueprint $table) {
-            //
+            $table->string('unique_id');
         });
     }
 

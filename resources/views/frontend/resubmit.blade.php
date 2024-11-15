@@ -6,6 +6,7 @@
     $title = $journalDataById[0]->paper_title;
     $departmentId = $journalDataById[0]->department_id;
     $Id = $journalDataById[0]->id;
+    // dd($Id);
 @endphp
 
 
@@ -45,12 +46,12 @@
                                                 {{ $row->mobile }}
                                             </p>
                                             <p><strong>Paper:</strong> <input type="file" name="file"
-                                                    id="file">
+                                                    id="file" required>
                                             </p>
                                             <p><strong>Keywords:</strong> {{ $row->key_words }}</p>
                                         </div>
                                         {{-- <input type="hidden" value={{ $row->journal_id }}> --}}
-                                        {{-- <input type="hidden" name="staffid" value={{ $userId }}> --}}
+                                        <input type="hidden" name="id" value={{ $Id }}>
                                         <input type="hidden" name="journelid" value={{ $journalId }}>
                                         {{-- <input type="hidden" name="email" value={{ $email }}>
                                         <input type="hidden" name="departmentid" value={{ $departmentId }}> --}}

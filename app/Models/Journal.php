@@ -18,6 +18,7 @@ class Journal extends Model
         'key_words',
         'status',
         'otp',
+        'unique_id'
 
     ];
     // protected $guarded = ['id'];

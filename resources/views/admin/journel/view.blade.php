@@ -10,7 +10,7 @@
         $title = $journalDataById[0]->paper_title;
         $departmentId = $journalDataById[0]->department_id;
         $Id = $journalDataById[0]->id;
-        // dd($journalDataById);
+        $uniqueId = $journalDataById[0]->unique_id;
     @endphp
     <div class="container">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
@@ -111,6 +111,8 @@
                         <input type="hidden" name="email" value={{ $email }}>
                         <input type="hidden" name="name" value={{ $name }}>
                         <input type="hidden" name="title" value={{ $title }}>
+                        <input type="hidden" name="uniqueid" value={{ $uniqueId }}>
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id='close-modal-btn' class="btn  btn-outline-danger"
