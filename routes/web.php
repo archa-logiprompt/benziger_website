@@ -26,9 +26,7 @@ use App\Http\Controllers\NotificationsController;
 
 Route::get('/login', [AdminController::class, 'login'])->name('login');
 Route::post('/check-login', [AdminController::class, 'check'])->name('check.login');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[AdminController::class,'login']);
 Route::middleware([AdminMiddleware::class])->group(function () {
 
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');

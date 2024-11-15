@@ -8,12 +8,12 @@ use App\Models\Staff;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-
 use App\Models\Department;
 use App\Models\Journal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 // use DB;
+
 class StaffController extends Controller
 {
 
@@ -35,14 +35,14 @@ class StaffController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-// 'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users,email',
 
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('staff', 'email'),
-                Rule::unique('users', 'email'),
-            ],
+            // 'email' => [
+            //     'required',
+            //     'email',
+            //     Rule::unique('staff', 'email'),
+            //     Rule::unique('users', 'email'),
+            // ],
 
             'phone' => 'nullable|string',
             'password' => 'nullable|string',
@@ -50,8 +50,7 @@ class StaffController extends Controller
             'description' => 'nullable|string',
 
         ], [
-            'email.unique:staff' => 'This email is already taken in the staff table.',
-            'email.unique:users' => 'This email is already taken in the users table.',
+            'email.unique:staff' => 'This email is already exists.',
 
         ]);
         $userid = User::insertGetId(
@@ -97,19 +96,13 @@ class StaffController extends Controller
         $request->validate([
 
            'name' => 'required|string|max:255',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('staff', 'email'),
-                Rule::unique('users', 'email'),
-            ],
+           'email' => 'required|email|unique:users,email',
             'phone' => 'nullable|string',
             'password' => 'nullable|string',
             'department_id' => 'nullable|string',
             'description' => 'nullable|string',
         ], [
-            'email.unique:staff' => 'This email is already taken in the staff table.',
-            'email.unique:users' => 'This email is already taken in the users table.',
+            'email.unique:staff' => 'This email is already exists.',
 
         ]);
         $post = Staff::find($id);

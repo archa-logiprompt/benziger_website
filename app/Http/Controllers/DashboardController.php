@@ -14,8 +14,7 @@ class DashboardController extends Controller
 
         $department = DB::table('department')->count();
         $staff = DB::table('staff')->count();
-
-
         return view('welcome', compact('department', 'staff'));
+        
     }
 }
