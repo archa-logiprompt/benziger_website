@@ -10,7 +10,7 @@ class ResearchArea extends Model
     use HasFactory;
     protected $table = "research_area";
     protected $fillable = [
-        'researchArea', 
+        'name', 
         'description', 
         
     ];

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ResearchArea;
-
+use Illuminate\Validation\Rule;
 class ResearchareaController extends Controller
 {
 // view form
@@ -17,12 +17,18 @@ class ResearchareaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'researchArea' => 'required',
             'description',
+            'name' => [
+                'required',
+                'string',
+                Rule::unique('research_area', 'name'),
+            ],
+        ], [
+            'name.unique' => 'This name is already exists.',  
         ]);
 
         ResearchArea::create([
-            'researchArea' => $request->researchArea,
+            'name' => $request->name,
             'description' => $request->description,
         ]);
 
@@ -55,7 +61,7 @@ class ResearchareaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'researchArea' => 'required',
+            'name' => 'required',
             'description',
         ]);
         $post = ResearchArea::find($id);

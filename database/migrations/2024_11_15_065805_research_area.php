@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('research_area', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('researchArea',40 );
+            $table->string('name',40 );
             $table->string('description', 15)->nullable();;
             $table->timestamps();
         });

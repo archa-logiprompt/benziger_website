@@ -24,7 +24,7 @@
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th> Research Area</th>
+                                        <th> Name</th>
                                         <th>Description</th>
                                         <th>Action</th>
                                     </tr>
@@ -34,7 +34,7 @@
                                     @foreach($researchAreas as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->researchArea }}</td>
+                                        <td>{{ $row->name }}</td>
                                         <td>{{ $row->description}}</td>
 
                                         <td>

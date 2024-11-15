@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Department List</h4>
+                    <h4 class="card-title">Staff List</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
