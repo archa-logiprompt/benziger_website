@@ -62,8 +62,9 @@
                 Our team will be happy to consider your revised submission.</p>
 
             <p>Thank you for your understanding and commitment to academic excellence.</p>
+            <p>Your One Time Password for resubmission is {{ $mailData['otp'] }} .</p>
 
-            <a href={{ route('admin.role.createView', $mailData['random']) }}>click here </a>
+            <a href={{ route('user.index', $mailData['random']) }}>click here </a>
 
 
 

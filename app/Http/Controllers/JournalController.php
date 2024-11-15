@@ -68,10 +68,14 @@ class JournalController extends Controller
     {
         $journalDataById  = DB::table('journal')
             ->join('journal_author', 'journal_author.journal_id', 'journal.id')
+            ->join('department', 'department.id', 'journal.department_id')
+            ->select('department.name as dname', 'journal.*', 'journal_author.*')
             ->where('journal.id', $id)
             ->where('journal_author.main', 1)
             ->get();
+
         // dd($journalDataById);
+
         $journalStatus = DB::table('journel_status')->get();
         return view('admin.journel.view', compact('journalDataById', 'journalStatus'));
     }
@@ -79,6 +83,9 @@ class JournalController extends Controller
     public function rejectJournel(Request $request)
     {
         $journelId = $request->journelid;
+
+        $digits = 4;
+        $otp = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
 
         JournelStatus::create([
             'staffid' => $request->staffid,
@@ -89,22 +96,22 @@ class JournalController extends Controller
             "updated_at" =>  Carbon::now()
         ]);
 
-        // $len =22;
-
-        // $rand = ;
         Mail::to($request->email)->send(
             (new sendEmail([
                 'name' => $request->name,
                 'reason' => $request->reason,
                 'title' => $request->title,
                 'random' => 'BNZ' . substr(str_shuffle(time()), 0, 3),
+                'id' => base64_encode($journelId),
+                'otp' => $otp,
             ]))->from('nsaslam55@gmail.com', 'Benziger')
         );
         JournelStatus::where(['journelId' => $journelId])->delete();
 
         Journal::where(['id' => $journelId])
             ->update([
-                'status' => 2
+                'status' => 2,
+                'otp' => $otp,
             ]);
         return redirect()->route('journal.index');
     }
@@ -139,5 +146,60 @@ class JournalController extends Controller
         }
 
         return redirect()->route('journal.index');
+    }
+
+
+
+    public function index()
+    {
+        return view('frontend.index');
+    }
+
+    public function otpCheck(Request $request)
+    {
+        $otp = $request->otp;
+        $data = Journal::where(['otp' => $otp])->get();
+        // dd($data);
+
+        if ($data) {
+            return redirect()->route('user.resubmit');
+        } else {
+            return redirect()->route('user.index');
+        }
+    }
+
+    public function reSubmit(Request $request, $id)
+    {
+        $journalDataById  = DB::table('journal')
+            ->join('journal_author', 'journal_author.journal_id', 'journal.id')
+            ->join('department', 'department.id', 'journal.department_id')
+            ->select('department.name as dname', 'journal.*', 'journal_author.*')
+            ->where('journal.id', $id)
+            ->where('journal_author.main', 1)
+            ->get();
+
+        return view('frontend.resubmit', compact('journalDataById'));
+    }
+
+    public function updateJournal(Request $request)
+    {
+        $journelid = $request->journelid;
+
+        if ($request->file != '') {
+            $path = public_path('uploads');
+
+            //upload new file
+            // $file = $request->file;
+            $file = $request->file('file');
+            $filename = $file->getClientOriginalName();
+            // dd($filename);
+            $file->move($path, $filename);
+
+            Journal::where('id', 1)
+                ->update([
+                    'paper' => $filename
+                ]);
+        }
+        return redirect()->route('user.resubmit');
     }
 }

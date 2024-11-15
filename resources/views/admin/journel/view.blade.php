@@ -9,6 +9,8 @@
         $name = $journalDataById[0]->name;
         $title = $journalDataById[0]->paper_title;
         $departmentId = $journalDataById[0]->department_id;
+        $Id = $journalDataById[0]->id;
+        // dd($journalDataById);
     @endphp
     <div class="container">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
@@ -50,7 +52,7 @@
                                                     </div>
 
                                                     <p class="mt-2"><strong>Department:</strong>
-                                                        {{ $row->department_id }}
+                                                        {{ $row->dname }}
                                                     </p>
                                                     <p><strong>Mobile:</strong> +{{ $row->country_code }}
                                                         {{ $row->mobile }}

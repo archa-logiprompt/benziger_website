@@ -15,16 +15,20 @@ class Journal extends Model
         'country_code',
         'paper',
         'abstract',
-        'key_words'
+        'key_words',
+        'status',
+        'otp',
+
     ];
     // protected $guarded = ['id'];
 
 
-    public function department(){
-       return $this->belongsTo(Department::class);
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
-    public function journalAuthor(){
-       return $this->hasMany(JournalAuthor::class);
+    public function journalAuthor()
+    {
+        return $this->hasMany(JournalAuthor::class);
     }
-    
 }
