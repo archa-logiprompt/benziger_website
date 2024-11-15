@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table(' ', function (Blueprint $table) {
-            $table->string('image', 225);
-         
-
+        Schema::table('staff', function (Blueprint $table) {
+            $table->integer("roleid");
+            $table->foreign('roleid')->references('id')->on('role')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -27,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('staff', function (Blueprint $table) {
+            //
+        });
     }
 };

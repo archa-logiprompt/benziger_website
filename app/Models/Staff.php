@@ -11,11 +11,17 @@ class Staff extends Model
 
     protected $table = "staff";
     protected $fillable = [
-        'name', 
-        'email', 
+        'name',
+        'email',
         'phone',
         'password',
         'department_id',
-        'description'
+        'description',
+        'userid',
+        'roleid'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class,'userid');
+    }
 }

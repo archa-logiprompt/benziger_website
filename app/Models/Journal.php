@@ -10,11 +10,25 @@ class Journal extends Model
     use HasFactory;
     protected $table = "journal";
     protected $fillable = [
-        'paper_title', 
-        'research_area', 
+        'paper_title',
+        'department_id',
         'country_code',
         'paper',
         'abstract',
-        'key_words'
+        'key_words',
+        'status',
+        'otp',
+
     ];
+    // protected $guarded = ['id'];
+
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    public function journalAuthor()
+    {
+        return $this->hasMany(JournalAuthor::class);
+    }
 }

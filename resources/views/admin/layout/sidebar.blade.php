@@ -1,10 +1,14 @@
+@php
+    $permissions = Session::get('permissions')->toArray();
+    $data = Auth::user();
+@endphp
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
                 <!-- <img
-                src="{{asset('backend/img/kaiadmin/logo_light.png')}}"
+                src="{{ asset('backend/img/kaiadmin/logo_light.png') }}"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20"
@@ -32,6 +36,7 @@
         <div class="sidebar-content">
 
             <ul class="nav nav-secondary">
+
                 <li class="nav-item ">
                     <a href="{{ route('dashboard') }}" class="collapsed" aria-expanded="false">
                         <i class="fa fa-home"></i>
@@ -56,6 +61,62 @@
                         <p>Research Area</p>
                     </a>
                 </li>
+
+<!-- Aslam
+                @if (in_array('dashboard', $permissions) || $data->role == 1)
+                    <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-home"> </i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                @endif
+
+                @if (in_array('department', $permissions) || $data->role == 1)
+                    <li class="nav-item {{ Request::is('department') ? 'active' : '' }}">
+                        <a href="{{ route('department') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-building"></i>
+                            <p>Department</p>
+                        </a>
+                    </li>
+                @endif
+
+                @if (in_array('staff', $permissions) || $data->role == 1)
+                    <li class="nav-item {{ Request::is('admin/staff') ? 'active' : '' }}">
+                        <a href="{{ route('admin.staff') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-users"></i>
+                            <p>Staff</p>
+                        </a>
+                    </li>
+                @endif
+
+                @if (in_array('roles', $permissions) || $data->role == 1)
+                    <li class="nav-item {{ Request::is('admin/roles/index') ? 'active' : '' }}">
+                        <a href="{{ route('admin.roles.view') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-users"></i>
+                            <p>Roles</p>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- @if (in_array('research_area', $permissions) || $data->role == 1)
+                    <li class="nav-item {{ Request::is('admin/researcharea') ? 'active' : '' }}">
+                        <a href="{{ route('admin.researcharea') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-users"></i>
+                            <p>Research Area</p>
+                        </a>
+                    </li>
+                @endif --}}
+
+                @if (in_array('journals', $permissions) || $data->role == 1)
+                    <li class="nav-item {{ Request::is('staff/journal') ? 'active' : '' }}">
+                        <a href="{{ route('journal.index') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-users"></i>
+                            <p>Journels</p>
+                        </a>
+                    </li>
+                @endif -->
+
 
                 <li class="nav-item">
                     <a href="{{ route('admin.notifications') }}" class="collapsed" aria-expanded="false">

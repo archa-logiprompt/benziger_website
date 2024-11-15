@@ -9,7 +9,7 @@ class JournalAuthor extends Model
 {
     use HasFactory;
    
-    protected $table = "journal_authors";
+    protected $table = "journal_author";
     protected $fillable = [
         'journal_id',
         'name', 
@@ -25,5 +25,9 @@ class JournalAuthor extends Model
         'postalCode',
         'main'
     ];
+
+    public function journal(){
+        return $this->belongsTo(Journal::class);
+     }
 }
 
