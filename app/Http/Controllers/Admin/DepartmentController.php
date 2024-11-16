@@ -28,27 +28,31 @@ class DepartmentController extends Controller
             [
                 'name' => 'required|string|max:255',
                 'description' => 'nullable|string',
-                'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048', // image validation
+                'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048', // image validation
             ],
             ['image.mime' => 'Only jpeg, png, jpg, gif, svg extensions are allowed!']
         );
 
         // Handle the photo upload
-        $filename = null;
+        // $filename = null;
+        // dd($filename);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = 'departments/' . time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('departments'), $filename);
+            // dd($filename);
+
+            Department::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'image' => $filename,
+            ]);
         }
-        Department::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $filename,
-        ]);
+
 
         // Redirect or return response
-        return redirect('admin/department')->with('success', 'Department created successfully!');
+        return redirect('department')->with('success', 'Department created successfully!');
     }
 
     public function destroy($id)
@@ -85,5 +89,4 @@ class DepartmentController extends Controller
         Department::where('id', $id)->update($data);
         return redirect('department');
     }
-
 }

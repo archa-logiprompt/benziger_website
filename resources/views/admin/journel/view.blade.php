@@ -2,6 +2,7 @@
 
 @section('body')
     @php
+        // dd($journalDataById);
         $userId = Auth::user()->id;
         $role = Auth::user()->role;
         $journalId = $journalDataById[0]->journal_id;

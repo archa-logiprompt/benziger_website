@@ -1,6 +1,6 @@
 @php
-$permissions = Session::get('permissions')->toArray();
-$data = Auth::user();
+    $permissions = Session::get('permissions')->toArray();
+    $data = Auth::user();
 @endphp
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
@@ -37,39 +37,39 @@ $data = Auth::user();
             <ul class="nav nav-secondary">
 
                 @if (in_array('dashboard', $permissions) || $data->role == 1)
-                <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
-                    <a href="{{ route('dashboard') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-home"> </i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
+                    <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-home"> </i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
                 @endif
 
                 @if (in_array('department', $permissions) || $data->role == 1)
-                <li class="nav-item {{ Request::is('department') ? 'active' : '' }}">
-                    <a href="{{ route('department') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-building"></i>
-                        <p>Department</p>
-                    </a>
-                </li>
+                    <li class="nav-item {{ Request::is('department') ? 'active' : '' }}">
+                        <a href="{{ route('department') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-building"></i>
+                            <p>Department</p>
+                        </a>
+                    </li>
                 @endif
 
                 @if (in_array('staff', $permissions) || $data->role == 1)
-                <li class="nav-item {{ Request::is('admin/staff') ? 'active' : '' }}">
-                    <a href="{{ route('admin.staff') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-users"></i>
-                        <p>Staff</p>
-                    </a>
-                </li>
+                    <li class="nav-item {{ Request::is('admin/staff') ? 'active' : '' }}">
+                        <a href="{{ route('admin.staff') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-users"></i>
+                            <p>Staff</p>
+                        </a>
+                    </li>
                 @endif
 
                 @if (in_array('roles', $permissions) || $data->role == 1)
-                <li class="nav-item {{ Request::is('admin/roles/index') ? 'active' : '' }}">
-                    <a href="{{ route('admin.roles.view') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-user"></i>
-                        <p>Roles</p>
-                    </a>
-                </li>
+                    <li class="nav-item {{ Request::is('admin/roles/index') ? 'active' : '' }}">
+                        <a href="{{ route('admin.roles.view') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                            <p>Roles</p>
+                        </a>
+                    </li>
                 @endif
 
                 {{-- @if (in_array('research_area', $permissions) || $data->role == 1)
@@ -82,39 +82,39 @@ $data = Auth::user();
                 @endif --}}
 
                 @if (in_array('journals', $permissions) || $data->role == 1)
-                <li class="nav-item {{ Request::is('staff/journal') ? 'active' : '' }}">
-                    <a href="{{ route('journal.index') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-book"></i>
-                        <p>Journels</p>
-                    </a>
-                </li>
+                    <li class="nav-item {{ Request::is('staff/journal') ? 'active' : '' }}">
+                        <a href="{{ route('journal.index') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-book"></i>
+                            <p>Journels</p>
+                        </a>
+                    </li>
                 @endif
 
                 @if (in_array('notifications', $permissions) || $data->role == 1)
-                <li class="nav-item">
-                    <a href="{{ route('admin.notifications') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.notifications') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            <p>Notifications</p>
+                        </a>
+                    </li>
                 @endif
 
-                @if (in_array('bannerImage', $permissions) || $data->role == 1)
-                <li class="nav-item">
-                    <a href="{{ route('admin.bannerImage') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-image"></i>
-                        <p>Banner Images</p>
-                    </a>
-                </li>
+                @if (in_array('banner_image', $permissions) || $data->role == 1)
+                    <li class="nav-item">
+                        <a href="{{ route('admin.bannerImage') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-image"></i>
+                            <p>Banner Images</p>
+                        </a>
+                    </li>
                 @endif
 
-                @if (in_array('generalsettings', $permissions) || $data->role == 1)
-                <li class="nav-item">
-                    <a href="{{ route('admin.generalsettings') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-cog"></i>
-                        <p>General Settings</p>
-                    </a>
-                </li>
+                @if (in_array('general_settings', $permissions) || $data->role == 1)
+                    <li class="nav-item">
+                        <a href="{{ route('admin.generalsettings') }}" class="collapsed" aria-expanded="false">
+                            <i class="fa fa-cog"></i>
+                            <p>General Settings</p>
+                        </a>
+                    </li>
                 @endif
 
             </ul>

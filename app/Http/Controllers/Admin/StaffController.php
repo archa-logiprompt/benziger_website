@@ -20,22 +20,27 @@ class StaffController extends Controller
     public function index()
     {
         $staff = Staff::all();
+
+        $staff = DB::table('staff')
+            ->join('users', 'users.id', 'staff.userid')
+            ->select('staff.*', 'users.email')
+            ->get();
         $role = Role::all();
-        return view('admin.staff.index', compact('staff','role'));
+        return view('admin.staff.index', compact('staff', 'role'));
     }
 
     public function create()
     {
         $department = Department::all();
         $role = Role::all();
-        return view('admin.staff.create', compact('department','role'));
+        return view('admin.staff.create', compact('department', 'role'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            // 'email' => 'required|email|unique:users,email',
 
             // 'email' => [
             //     'required',
@@ -49,10 +54,7 @@ class StaffController extends Controller
             'department_id' => 'nullable|string',
             'description' => 'nullable|string',
 
-        ], [
-            'email.unique:staff' => 'This email is already exists.',
-
-        ]);
+        ],);
         $userid = User::insertGetId(
             [
                 'name' => $request->name,
@@ -61,10 +63,9 @@ class StaffController extends Controller
                 'role' => 2
             ]
         );
+
         Staff::create([
             'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
             'phone' => $request->phone,
             'department_id' => $request->department_id,
             'description' => $request->description,
@@ -84,19 +85,25 @@ class StaffController extends Controller
     public function edit($id)
     {
         // $staffdetails=Staff::where('id',$id)->first();
+        // dd($id);
         $department = Department::all();
-        $staffdetails = DB::table('staff')->select('staff.*', 'department.name as dname')->join('department', 'staff.department_id', '=', 'department.id')
-            ->where('staff.id', $id)->first();
+        $staffdetails = DB::table('staff')
+            ->select('staff.*', 'department.name as dname', 'users.email as user_email', 'users.password as user_password')
+            ->join('department', 'staff.department_id', '=', 'department.id')
+            ->join('users', 'users.id', 'staff.userid')
+            ->where('users.id', $id)->first();
+
+        // dd($staffdetails);
 
         return view('admin.staff.edit', compact('staffdetails', 'department'));
     }
 
     public function update(Request $request, $id)
     {
+        // dd($id);
         $request->validate([
-
-           'name' => 'required|string|max:255',
-           'email' => 'required|email|unique:users,email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
             'phone' => 'nullable|string',
             'password' => 'nullable|string',
             'department_id' => 'nullable|string',
@@ -105,9 +112,29 @@ class StaffController extends Controller
             'email.unique:staff' => 'This email is already exists.',
 
         ]);
-        $post = Staff::find($id);
-        $post->update($request->all());
+        // dd($request->email);
+        Staff::where('userid', $id)->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'description' => $request->description,
+        ]);
+
+        $user = User::where('id', $id)->firstOrFail();
+
+        $userData = [
+            'email' => $request->email,
+            'name' => $request->name,
+        ];
+
+        if ($request->filled('password')) {
+            $userData['password'] = Hash::make($request->password);
+        }
+
+        $user->update($userData);;
+
+
+
+
         return redirect()->route('admin.staff')->with('success', 'staff updated successfully.');
     }
-
 }

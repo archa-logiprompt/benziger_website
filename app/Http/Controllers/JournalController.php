@@ -58,6 +58,7 @@ class JournalController extends Controller
 
     public function viewJournalById($id)
     {
+        // dd($id); 
         $journalDataById  = DB::table('journal')
             ->join('journal_author', 'journal_author.journal_id', 'journal.id')
             ->join('department', 'department.id', 'journal.department_id')
@@ -65,7 +66,7 @@ class JournalController extends Controller
             ->where('journal.id', $id)
             ->where('journal_author.main', 1)
             ->get();
-
+        // dd($journalDataById)
         $journalStatus = DB::table('journel_status')->get();
         return view('admin.journel.view', compact('journalDataById', 'journalStatus'));
     }
