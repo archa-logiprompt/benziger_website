@@ -67,7 +67,7 @@ $data = Auth::user();
                 @if (in_array('roles', $permissions) || $data->role == 1)
                 <li class="nav-item {{ Request::is('admin/roles/index') ? 'active' : '' }}">
                     <a href="{{ route('admin.roles.view') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-user"></i>
                         <p>Roles</p>
                     </a>
                 </li>
@@ -85,13 +85,13 @@ $data = Auth::user();
                 @if (in_array('journals', $permissions) || $data->role == 1)
                 <li class="nav-item {{ Request::is('staff/journal') ? 'active' : '' }}">
                     <a href="{{ route('journal.index') }}" class="collapsed" aria-expanded="false">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-book"></i>
                         <p>Journels</p>
                     </a>
                 </li>
                 @endif
 
-                @if (in_array('journals', $permissions) || $data->role == 1)
+                @if (in_array('notifications', $permissions) || $data->role == 1)
                 <li class="nav-item">
                     <a href="{{ route('admin.notifications') }}" class="collapsed" aria-expanded="false">
                         <i class="fa fa-bell"></i>
@@ -100,7 +100,7 @@ $data = Auth::user();
                 </li>
                 @endif
 
-                @if (in_array('journals', $permissions) || $data->role == 1)
+                @if (in_array('bannerImage', $permissions) || $data->role == 1)
                 <li class="nav-item">
                     <a href="{{ route('admin.bannerImage') }}" class="collapsed" aria-expanded="false">
                         <i class="fa fa-image"></i>
@@ -109,7 +109,7 @@ $data = Auth::user();
                 </li>
                 @endif
 
-                @if (in_array('journals', $permissions) || $data->role == 1)
+                @if (in_array('generalsettings', $permissions) || $data->role == 1)
                 <li class="nav-item">
                     <a href="{{ route('admin.generalsettings') }}" class="collapsed" aria-expanded="false">
                         <i class="fa fa-cog"></i>
