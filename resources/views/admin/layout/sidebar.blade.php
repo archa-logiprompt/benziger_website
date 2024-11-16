@@ -16,7 +16,6 @@
 
               /> -->
                 <h2 style="color: white;">ADMIN PANEL</h2>
-
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
