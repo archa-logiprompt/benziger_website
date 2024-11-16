@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('research_area', function (Blueprint $table) {
+        Schema::create('bannerImage', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('researchArea',40 );
-            $table->string('description', 15)->nullable();;
+            $table->string('title', 100);
+            $table->string('picture', 255);
             $table->timestamps();
         });
-
     }
 
     /**
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('research_area');
+        Schema::dropIfExists('bannerImage');
     }
 };

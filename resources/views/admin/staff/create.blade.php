@@ -8,52 +8,68 @@
         <div class="ms-md-auto py-2 py-md-0">
             <a href="{{route('admin.staff')}}" class="btn btn-primary btn-round me-2"><i class="fas fa-list"></i></i>
                 View Staff</a>
+        </div>
     </div>
-    </div>
-    
 
-<form action="{{route('admin.staff.store')}}" method="POST" enctype="multipart/form-data">
-    @csrf
 
-    <div class="form-group">
-    <label for="name">Name </label>
-   <input type="text" name="name" class="form-control">
+    <form action="{{route('admin.staff.store')}}" method="POST">
+        @csrf
+        
+        <div class=" form-group">
+            <label for="name">Name </label>
+            <input type="text" name="name" class="form-control">
+            @if ($errors->has('name'))
+            <div class="alert alert-danger mt-2">
+                {{ $errors->first('name') }}
+            </div>
+            @endif
 
-    </div> <div class="form-group">
-   <label for="email"> Email</label>
-   <input type="email" name="email" class="form-control">
-</div> <div class="form-group">
-   <label for="">Phone Number</label>
-   <input type="number" name="phone" class="form-control ">
-   </div> <div class="form-group">
-<label for="password"> Password</label>
-<input type="text" name="password" class="form-control">
-</div> 
-<div class="form-group">
-<label for="">Department</label>
-<select class="form-control" name="department_id">
-    @foreach($department as $item)
-      <option value="{{$item->id}}">{{$item->name}}</option>
-    @endforeach
-  </select>
-</div> 
+        </div>
+        <div class="form-group">
+            <label for="email"> Email</label>
+            <input type="email" name="email" class="form-control">
+            @if ($errors->has('email'))
+            <div class="alert alert-danger mt-2">
+                {{ $errors->first('email') }}
+            </div>
+            @endif
+        </div>
 
-<div class="form-group">
-<label for="">Role</label>
-<select class="form-control" name="role">
-    @foreach($role as $roleitem)
-      <option value="{{$roleitem->id}}">{{$roleitem->name}}</option>
-    @endforeach
-  </select>
-</div> 
-<div class="form-group">
-<label for="">Description</label>
-{{-- <input type="text" name="description" class="form-control"> --}}
-<textarea  name="description" class="form-control"></textarea>
-</div>
-<div class="form-group">
-<button type="submit" class="btn btn-success">Submit</button>
-</div>
-</form>
+        <div class="form-group">
+            <label for="">Phone Number</label>
+            <input type="number" name="phone" class="form-control ">
+        </div>
+
+        <div class="form-group">
+            <label for="password"> Password</label>
+            <input type="text" name="password" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="">Department</label>
+            <select class="form-control" name="department_id">
+                @foreach($department as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="">Role</label>
+            <select class="form-control" name="role">
+                @foreach($role as $roleitem)
+                <option value="{{$roleitem->id}}">{{$roleitem->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Description</label>
+            <textarea name="description" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
 </div>
 @endsection

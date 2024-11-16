@@ -8,40 +8,50 @@ use App\Models\Staff;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-
 use App\Models\Department;
 use App\Models\Journal;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 // use DB;
+
 class StaffController extends Controller
 {
 
     public function index()
     {
-
         $staff = Staff::all();
         $role = Role::all();
-
-        return view('admin.staff.index', compact('staff', 'role'));
+        return view('admin.staff.index', compact('staff','role'));
     }
+
     public function create()
     {
-
         $department = Department::all();
         $role = Role::all();
-        return view('admin.staff.create', compact('department', 'role'));
+        return view('admin.staff.create', compact('department','role'));
     }
 
     public function store(Request $request)
     {
-        // dd($request->all()); 
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+
+            // 'email' => [
+            //     'required',
+            //     'email',
+            //     Rule::unique('staff', 'email'),
+            //     Rule::unique('users', 'email'),
+            // ],
+
             'phone' => 'nullable|string',
             'password' => 'nullable|string',
             'department_id' => 'nullable|string',
             'description' => 'nullable|string',
+
+        ], [
+            'email.unique:staff' => 'This email is already exists.',
+
         ]);
         $userid = User::insertGetId(
             [
@@ -60,11 +70,9 @@ class StaffController extends Controller
             'description' => $request->description,
             'userid' => $userid,
             'roleid' => $request->role
-
         ]);
         return redirect()->route('admin.staff')->with('success', 'Staff created successfully!');
     }
-
 
 
     public function destroy($id)
@@ -82,16 +90,24 @@ class StaffController extends Controller
 
         return view('admin.staff.edit', compact('staffdetails', 'department'));
     }
+
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+
+           'name' => 'required|string|max:255',
+           'email' => 'required|email|unique:users,email',
+            'phone' => 'nullable|string',
+            'password' => 'nullable|string',
+            'department_id' => 'nullable|string',
             'description' => 'nullable|string',
+        ], [
+            'email.unique:staff' => 'This email is already exists.',
+
         ]);
         $post = Staff::find($id);
         $post->update($request->all());
         return redirect()->route('admin.staff')->with('success', 'staff updated successfully.');
     }
 
-    
 }
